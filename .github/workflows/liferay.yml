@@ -38,6 +38,22 @@ jobs:
       - name: Relative Markdown links resolve
         run: python3 .github/scripts/check_md_links.py
 
+  liferaykit:
+    name: LiferayKit unit tests (Linux)
+    runs-on: ubuntu-latest
+    # Runs the platform-independent Swift code (OAuth, PKCE, API client, models) against the
+    # recorded fixtures. Apple-only code (Keychain, sign-in sheet, SwiftUI) is built in Xcode.
+    container: swift:6.1
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: ios/LiferayKit
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: swift test
+        run: swift test
+
   liferay-api:
     name: Liferay API smoke test
     runs-on: ubuntu-latest
@@ -66,7 +82,11 @@ jobs:
         run: |
           ./scripts/record-fixtures.sh "$RUNNER_TEMP/fixtures"
           # Ids and dates differ between runs; compare only the JSON structure (sorted key paths).
-          shape() { jq -c '[paths | map(if type == "number" then 0 else . end)] | unique | .[]' "$1"; }
+          # lastLoginDate/loginDate only exist once a user has signed in through the browser.
+          shape() {
+            jq -c '[paths | select(.[0] != "lastLoginDate" and .[0] != "loginDate")
+              | map(if type == "number" then 0 else . end)] | unique | .[]' "$1"
+          }
           status=0
           for recorded in "$RUNNER_TEMP"/fixtures/*.json; do
             name="$(basename "$recorded")"
