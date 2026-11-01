@@ -48,6 +48,20 @@ jobs:
           # Placeholder settings: enough to build and show the sign-in screen.
           cp Config/Local.xcconfig.example Config/Local.xcconfig
 
+      - name: Print the generated project file
+        if: always()
+        run: |
+          echo "=== BEGIN project.pbxproj ==="
+          cat LiferaySelfService.xcodeproj/project.pbxproj
+          echo "=== END project.pbxproj ==="
+
+      - name: Committed project matches project.yml
+        run: |
+          if ! git diff --quiet -- LiferaySelfService.xcodeproj/project.pbxproj; then
+            echo "::error file=ios/project.yml::LiferaySelfService.xcodeproj is out of date. Run 'cd ios && xcodegen generate' and commit the result (it is also printed above)."
+            exit 1
+          fi
+
       - name: Pick an iPhone simulator
         id: sim
         run: |
@@ -78,11 +92,8 @@ jobs:
           mkdir -p "$RUNNER_TEMP/artifacts"
           xcrun simctl io "$udid" screenshot "$RUNNER_TEMP/artifacts/sign-in-screen.png"
 
-      - name: Print the generated project and a small screenshot (for review without downloading)
+      - name: Print a small screenshot (for review without downloading)
         run: |
-          echo "=== BEGIN project.pbxproj ==="
-          cat LiferaySelfService.xcodeproj/project.pbxproj
-          echo "=== END project.pbxproj ==="
           sips -Z 640 "$RUNNER_TEMP/artifacts/sign-in-screen.png" --out "$RUNNER_TEMP/small.png" >/dev/null
           echo "=== BEGIN screenshot base64 ==="
           base64 -i "$RUNNER_TEMP/small.png" | fold -w 1000
