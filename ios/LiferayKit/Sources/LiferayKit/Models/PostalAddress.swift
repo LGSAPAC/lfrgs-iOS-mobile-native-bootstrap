@@ -93,7 +93,8 @@ public struct PostalAddressDraft: Sendable, Equatable {
         return errors
     }
 
-    func postalAddress(id: Int?) -> PostalAddress {
+    /// The address to send, with the country as Liferay expects it (English name).
+    public func postalAddress(id: Int?) -> PostalAddress {
         PostalAddress(id: id, name: name.trimmed.isEmpty ? nil : name.trimmed,
                       streetAddressLine1: street.trimmed, streetAddressLine2: street2.trimmed,
                       addressLocality: city.trimmed, addressRegion: regionCode.isEmpty ? nil : regionCode,

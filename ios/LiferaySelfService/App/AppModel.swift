@@ -28,22 +28,34 @@ final class AppModel {
     private let session: AuthSession?
     let api: APIClient?
 
-    init(bundle: Bundle = .main, store: TokenStore = KeychainTokenStore()) {
-        do {
-            let configuration = try LiferayConfiguration(bundle: bundle)
-            let oauth = OAuthClient(configuration: configuration)
-            let session = AuthSession(oauth: oauth, store: store)
-            self.oauth = oauth
-            self.session = session
-            self.api = APIClient(baseURL: configuration.baseURL, session: session)
-        } catch {
-            self.oauth = nil
-            self.session = nil
-            self.api = nil
-            self.state = .misconfigured(
-                "Missing or invalid settings (\(error)). Copy ios/Config/Local.xcconfig.example to Local.xcconfig and fill it in."
-            )
+    /// Talks to the Liferay configured in `Info.plist` / `Config/Local.xcconfig`.
+    convenience init(bundle: Bundle = .main, store: TokenStore = KeychainTokenStore()) {
+        switch Result(catching: { try LiferayConfiguration(bundle: bundle) }) {
+        case let .success(configuration):
+            self.init(configuration: configuration, transport: URLSession.shared, store: store)
+        case let .failure(error):
+            self.init(misconfigured: "Missing or invalid settings (\(error)). Copy ios/Config/Local.xcconfig.example to Local.xcconfig and fill it in.")
         }
+    }
+
+    init(configuration: LiferayConfiguration, transport: HTTPTransport, store: TokenStore) {
+        let oauth = OAuthClient(configuration: configuration, transport: transport)
+        let session = AuthSession(oauth: oauth, store: store)
+        self.oauth = oauth
+        self.session = session
+        self.api = APIClient(baseURL: configuration.baseURL, session: session, transport: transport)
+    }
+
+    private init(misconfigured message: String) {
+        oauth = nil
+        session = nil
+        api = nil
+        state = .misconfigured(message)
+    }
+
+    /// The signed-in user changed their profile (chapter 06).
+    func userDidChange(_ user: UserAccount) {
+        if case .signedIn = state { state = .signedIn(user) }
     }
 
     /// Restores the previous session from the Keychain, if there is one.

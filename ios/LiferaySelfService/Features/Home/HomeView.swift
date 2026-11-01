@@ -1,33 +1,31 @@
 import LiferayKit
 import SwiftUI
 
-/// The signed-in screen. Chapters 06–08 add Profile, Addresses and Service Requests here.
+/// The signed-in app: one tab per chapter (06 Profile, 07 Addresses, 08 Service Requests).
 struct HomeView: View {
+    enum Tab: String { case requests, addresses, profile }
+
     @Environment(AppModel.self) private var model
     let user: UserAccount
+    @State private var tab: Tab
+
+    init(user: UserAccount, initialTab: Tab = .requests) {
+        self.user = user
+        _tab = State(initialValue: initialTab)
+    }
 
     var body: some View {
-        NavigationStack {
-            List {
-                Section("Signed in as") {
-                    LabeledContent("Name", value: user.name)
-                    LabeledContent("Email", value: user.emailAddress)
-                    if let jobTitle = user.jobTitle, !jobTitle.isEmpty {
-                        LabeledContent("Job title", value: jobTitle)
-                    }
-                }
-                Section("Coming in the next chapters") {
-                    Label("My Profile", systemImage: "person.crop.circle")
-                    Label("My Addresses", systemImage: "house")
-                    Label("Service Requests", systemImage: "wrench.and.screwdriver")
-                }
-                .foregroundStyle(.secondary)
-            }
-            .navigationTitle("Hi, \(user.givenName ?? user.name)")
-            .toolbar {
-                Button("Sign out", role: .destructive) {
-                    Task { await model.signOut() }
-                }
+        if let api = model.api {
+            TabView(selection: $tab) {
+                NavigationStack { ServiceRequestListView(api: api) }
+                    .tabItem { Label("Requests", systemImage: "wrench.and.screwdriver") }
+                    .tag(Tab.requests)
+                NavigationStack { AddressListView(api: api, userAccountID: user.id) }
+                    .tabItem { Label("Addresses", systemImage: "house") }
+                    .tag(Tab.addresses)
+                NavigationStack { ProfileView(api: api, user: user) }
+                    .tabItem { Label("Profile", systemImage: "person.crop.circle") }
+                    .tag(Tab.profile)
             }
         }
     }

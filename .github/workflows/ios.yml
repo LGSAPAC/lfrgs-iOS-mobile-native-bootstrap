@@ -55,13 +55,6 @@ jobs:
           cat LiferaySelfService.xcodeproj/project.pbxproj
           echo "=== END project.pbxproj ==="
 
-      - name: Committed project matches project.yml
-        run: |
-          if ! git diff --quiet -- LiferaySelfService.xcodeproj/project.pbxproj; then
-            echo "::error file=ios/project.yml::LiferaySelfService.xcodeproj is out of date. Run 'cd ios && xcodegen generate' and commit the result (it is also printed above)."
-            exit 1
-          fi
-
       - name: Pick an iPhone simulator
         id: sim
         run: |
@@ -80,24 +73,46 @@ jobs:
             -derivedDataPath "$RUNNER_TEMP/derived" \
             CODE_SIGNING_ALLOWED=NO | tee "$RUNNER_TEMP/xcodebuild.log" | grep -E "error:|warning:|BUILD (SUCCEEDED|FAILED)"
 
-      - name: Launch in the simulator and take a screenshot
+      - name: Launch in the simulator and take screenshots
         run: |
           udid=${{ steps.sim.outputs.udid }}
           app="$RUNNER_TEMP/derived/Build/Products/Debug-iphonesimulator/LiferaySelfService.app"
+          bundle=com.liferay.sample.selfservice
+          shots="$RUNNER_TEMP/artifacts"
+          mkdir -p "$shots"
           xcrun simctl boot "$udid" || true
           xcrun simctl bootstatus "$udid" -b
           xcrun simctl install "$udid" "$app"
-          xcrun simctl launch "$udid" com.liferay.sample.selfservice
-          sleep 10
-          mkdir -p "$RUNNER_TEMP/artifacts"
-          xcrun simctl io "$udid" screenshot "$RUNNER_TEMP/artifacts/sign-in-screen.png"
 
-      - name: Print a small screenshot (for review without downloading)
+          # 1. Normal launch: no Liferay here, so the app stops at the sign-in screen.
+          xcrun simctl launch "$udid" "$bundle"
+          sleep 10
+          xcrun simctl io "$udid" screenshot "$shots/sign-in-screen.png"
+
+          # 2. Demo mode (in-memory backend), one launch per tab.
+          for tab in requests addresses profile; do
+            xcrun simctl terminate "$udid" "$bundle" || true
+            xcrun simctl launch "$udid" "$bundle" --demo --tab "$tab"
+            sleep 6
+            xcrun simctl io "$udid" screenshot "$shots/demo-$tab.png"
+          done
+
+      - name: Print small screenshots (for review without downloading)
         run: |
-          sips -Z 640 "$RUNNER_TEMP/artifacts/sign-in-screen.png" --out "$RUNNER_TEMP/small.png" >/dev/null
-          echo "=== BEGIN screenshot base64 ==="
-          base64 -i "$RUNNER_TEMP/small.png" | fold -w 1000
-          echo "=== END screenshot base64 ==="
+          for shot in "$RUNNER_TEMP"/artifacts/*.png; do
+            name=$(basename "$shot" .png)
+            sips -Z 640 "$shot" --out "$RUNNER_TEMP/small-$name.png" >/dev/null
+            echo "=== BEGIN screenshot $name ==="
+            base64 -i "$RUNNER_TEMP/small-$name.png" | fold -w 1000
+            echo "=== END screenshot $name ==="
+          done
+
+      - name: Committed project matches project.yml
+        run: |
+          if ! git diff --quiet -- LiferaySelfService.xcodeproj/project.pbxproj; then
+            echo "::error file=ios/project.yml::LiferaySelfService.xcodeproj is out of date. Run 'cd ios && xcodegen generate' and commit the result (it is also printed above)."
+            exit 1
+          fi
 
       - name: Package the generated project
         if: always()
