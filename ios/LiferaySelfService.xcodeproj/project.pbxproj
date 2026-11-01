@@ -7,21 +7,41 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E7CE4AB524348AA14AF71A5 /* AddressFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799B2F25D40B8A9DA3063515 /* AddressFormView.swift */; };
+		345C8CAA876544AC3B02018E /* ServiceRequestListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8012877B636989D7EA8DBB3 /* ServiceRequestListView.swift */; };
+		35450F6D1401BA7EEF239D9D /* DemoBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB2C7432DA32669C7B3AC86 /* DemoBackend.swift */; };
+		5494CB47FE598481C597ED22 /* AddressListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020A6AFD6D42D949AB8B4EA0 /* AddressListModel.swift */; };
 		55DC1D9D9FB1D2948CBEA451 /* LiferaySelfServiceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8510DC3414C458BA269776CF /* LiferaySelfServiceApp.swift */; };
+		5950C80783720F8A86CB78BE /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EE11375A0EEFB435666B24 /* ProfileView.swift */; };
+		6BCDC8E0397CB449725F1F3C /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0C4E81470F0C7423919A38 /* ErrorMessage.swift */; };
 		895F6E8D56376A5941A9B704 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA013239C26001CC284C5EAE /* AppModel.swift */; };
+		8C4D20DA15869BC0B3632C8B /* ServiceRequestDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B567CF2F86A34E79C82CAE /* ServiceRequestDetailView.swift */; };
 		ACF4E6C9FB81A68DB7A4C1A5 /* LiferayKit in Frameworks */ = {isa = PBXBuildFile; productRef = 15DEC2E5405E598DC0B509C4 /* LiferayKit */; };
+		BB01828A4C00C38F11D184E5 /* AddressListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E63D94FAA3F3514ABCF6479 /* AddressListView.swift */; };
 		C9787E39A57652124716DF3C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32474AAA40F0E84B133BE12E /* HomeView.swift */; };
 		E8B8EA89D80B0C4EEB162113 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70802C27006068FD73E58344 /* LoginView.swift */; };
+		ED35720A76C2C255A223F7C7 /* ServiceRequestListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9E7465D7A478A7B6F8593E /* ServiceRequestListModel.swift */; };
+		FC61987294B35F681BD9123B /* ServiceRequestFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73529B4AA5B7698E40DD4522 /* ServiceRequestFormView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		020A6AFD6D42D949AB8B4EA0 /* AddressListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressListModel.swift; sourceTree = "<group>"; };
 		0BBE229E14FC616D9F0B3C1A /* LiferaySelfService.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = LiferaySelfService.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E63D94FAA3F3514ABCF6479 /* AddressListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressListView.swift; sourceTree = "<group>"; };
+		17B567CF2F86A34E79C82CAE /* ServiceRequestDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceRequestDetailView.swift; sourceTree = "<group>"; };
+		2A0C4E81470F0C7423919A38 /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		32474AAA40F0E84B133BE12E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		401C41BB4F67145F0DA8C27F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		4CB2C7432DA32669C7B3AC86 /* DemoBackend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoBackend.swift; sourceTree = "<group>"; };
 		70802C27006068FD73E58344 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		73529B4AA5B7698E40DD4522 /* ServiceRequestFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceRequestFormView.swift; sourceTree = "<group>"; };
 		76D65DD19088EA3C7638AA09 /* Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Shared.xcconfig; sourceTree = "<group>"; };
+		77EE11375A0EEFB435666B24 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		799B2F25D40B8A9DA3063515 /* AddressFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressFormView.swift; sourceTree = "<group>"; };
 		834A96387615404592E4E636 /* LiferayKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = LiferayKit; path = LiferayKit; sourceTree = SOURCE_ROOT; };
 		8510DC3414C458BA269776CF /* LiferaySelfServiceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiferaySelfServiceApp.swift; sourceTree = "<group>"; };
+		8B9E7465D7A478A7B6F8593E /* ServiceRequestListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceRequestListModel.swift; sourceTree = "<group>"; };
+		D8012877B636989D7EA8DBB3 /* ServiceRequestListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceRequestListView.swift; sourceTree = "<group>"; };
 		DA013239C26001CC284C5EAE /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -45,6 +65,16 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		0EF5F98C835703C6F3BA23F0 /* Addresses */ = {
+			isa = PBXGroup;
+			children = (
+				799B2F25D40B8A9DA3063515 /* AddressFormView.swift */,
+				020A6AFD6D42D949AB8B4EA0 /* AddressListModel.swift */,
+				0E63D94FAA3F3514ABCF6479 /* AddressListView.swift */,
+			);
+			path = Addresses;
+			sourceTree = "<group>";
+		};
 		818621630C70986742B4940F = {
 			isa = PBXGroup;
 			children = (
@@ -63,6 +93,17 @@
 			name = Packages;
 			sourceTree = "<group>";
 		};
+		B5E8CE872CD755BFFA997C1E /* ServiceRequests */ = {
+			isa = PBXGroup;
+			children = (
+				17B567CF2F86A34E79C82CAE /* ServiceRequestDetailView.swift */,
+				73529B4AA5B7698E40DD4522 /* ServiceRequestFormView.swift */,
+				8B9E7465D7A478A7B6F8593E /* ServiceRequestListModel.swift */,
+				D8012877B636989D7EA8DBB3 /* ServiceRequestListView.swift */,
+			);
+			path = ServiceRequests;
+			sourceTree = "<group>";
+		};
 		BA7E7455353B94E3270B845B /* Config */ = {
 			isa = PBXGroup;
 			children = (
@@ -75,6 +116,8 @@
 			isa = PBXGroup;
 			children = (
 				DA013239C26001CC284C5EAE /* AppModel.swift */,
+				4CB2C7432DA32669C7B3AC86 /* DemoBackend.swift */,
+				2A0C4E81470F0C7423919A38 /* ErrorMessage.swift */,
 				8510DC3414C458BA269776CF /* LiferaySelfServiceApp.swift */,
 			);
 			path = App;
@@ -83,8 +126,11 @@
 		C2D6B78BA75E43616551629E /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				0EF5F98C835703C6F3BA23F0 /* Addresses */,
 				D5D082F01A6634E9C266D995 /* Home */,
 				CC7D9D0285CBD3926993C3EF /* Login */,
+				F56855448651671344D370BF /* Profile */,
+				B5E8CE872CD755BFFA997C1E /* ServiceRequests */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -113,6 +159,14 @@
 				C2D6B78BA75E43616551629E /* Features */,
 			);
 			path = LiferaySelfService;
+			sourceTree = "<group>";
+		};
+		F56855448651671344D370BF /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				77EE11375A0EEFB435666B24 /* ProfileView.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -178,10 +232,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E7CE4AB524348AA14AF71A5 /* AddressFormView.swift in Sources */,
+				5494CB47FE598481C597ED22 /* AddressListModel.swift in Sources */,
+				BB01828A4C00C38F11D184E5 /* AddressListView.swift in Sources */,
 				895F6E8D56376A5941A9B704 /* AppModel.swift in Sources */,
+				35450F6D1401BA7EEF239D9D /* DemoBackend.swift in Sources */,
+				6BCDC8E0397CB449725F1F3C /* ErrorMessage.swift in Sources */,
 				C9787E39A57652124716DF3C /* HomeView.swift in Sources */,
 				55DC1D9D9FB1D2948CBEA451 /* LiferaySelfServiceApp.swift in Sources */,
 				E8B8EA89D80B0C4EEB162113 /* LoginView.swift in Sources */,
+				5950C80783720F8A86CB78BE /* ProfileView.swift in Sources */,
+				8C4D20DA15869BC0B3632C8B /* ServiceRequestDetailView.swift in Sources */,
+				FC61987294B35F681BD9123B /* ServiceRequestFormView.swift in Sources */,
+				ED35720A76C2C255A223F7C7 /* ServiceRequestListModel.swift in Sources */,
+				345C8CAA876544AC3B02018E /* ServiceRequestListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -174,4 +174,4 @@ swift test
 ✔ Test run with 20 tests passed
 ```
 
-Next: 06 — My Profile *(coming next)*.
+Next: [06 — My Profile](06-my-profile.md).

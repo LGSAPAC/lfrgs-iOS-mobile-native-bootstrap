@@ -23,7 +23,9 @@ the headless APIs, but there was no end-to-end example. This is one.
 | [03](docs/tutorial/03-create-ios-project.md) | Create the iOS project | ✅ Built by CI with Xcode 26.6; launches to the sign-in screen |
 | [04](docs/tutorial/04-sign-in-oauth-pkce.md) | Sign in with OAuth 2 + PKCE | 🧪 OAuth/PKCE code unit-tested; sign-in against Liferay not yet run in the app |
 | [05](docs/tutorial/05-api-client.md) | A small, correct API client | 🧪 Unit-tested against recorded Liferay responses |
-| 06–08 | Profile, addresses and Service Requests (CRUD) | 🚧 Models and endpoints done and tested; screens next |
+| [06](docs/tutorial/06-my-profile.md) | My Profile (system object: User) | 🧪 API checked live in CI; screen built and screenshotted in demo mode |
+| [07](docs/tutorial/07-my-addresses.md) | My Addresses (system object: Postal Address) | 🧪 API checked live in CI; screen built and screenshotted in demo mode |
+| [08](docs/tutorial/08-service-requests.md) | Service Requests (custom object) | 🧪 API checked live in CI; screen built and screenshotted in demo mode |
 | 09–11 | Testing, production hardening, next steps | Planned |
 
 The full plan, architecture and decisions are in [`docs/TUTORIAL_OUTLINE.md`](docs/TUTORIAL_OUTLINE.md).
@@ -46,6 +48,8 @@ Then create the OAuth 2 application as described in [chapter 02, step 3](docs/tu
 - Regular users **can't authorize an OAuth 2 app** until their role has *View* and *Create Token* on it.
 - There is **no POST for a user's postal address**: you PATCH the user account with the full list.
 - An **unknown picklist key returns `403 Forbidden`**, not a validation error.
+- **PATCH ignores `null`**, so clearing a field needs PUT; an empty Integer field comes back as `0`.
+- Address endpoints only agree on the **English country name**; an empty country is saved as *Afghanistan*.
 - Liferay 2026.Q1 has **no OAuth token revocation endpoint**, so sign-out is done on the device.
 - The Docker image's pre-built database forces an admin password change, so the tutorial uses a fresh one.
 

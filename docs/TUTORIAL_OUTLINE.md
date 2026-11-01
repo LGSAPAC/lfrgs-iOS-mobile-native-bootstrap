@@ -1,8 +1,9 @@
 # Tutorial Outline — Native iOS Self-Service App on Liferay 2026.Q1
 
-> Status: chapters 01–02 verified on a running Liferay; 03–05 written, with LiferayKit unit-tested
-> (`swift test`) and the app sources awaiting a first build on a Mac (`docs/tutorial/`). API details are checked against the 2026.Q1
-> source and a running instance (see section 6), so the tutorial never documents an endpoint from memory.
+> Status: chapters 01–08 written. The Liferay side (01–02, and every API call in 06–08) is checked
+> against a running DXP 2026.Q1 in CI; LiferayKit is unit-tested on Linux and macOS; the app is built
+> on a GitHub-hosted Mac and screenshotted in the Simulator (demo mode). Not yet run: signing in
+> through the app against a real Liferay (needs a Mac with Docker, or a reachable server).
 
 ## 1. Goal
 
