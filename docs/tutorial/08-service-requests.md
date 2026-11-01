@@ -104,4 +104,4 @@ wires it to SwiftUI:
 5. Signed in to Liferay as the admin, open the **Service Requests** entry that publishing the object
    added to the Control Panel: the admin sees everyone's requests.
 
-Next: 09 — Testing *(coming next)*.
+Next: [09 — Testing](09-testing.md).

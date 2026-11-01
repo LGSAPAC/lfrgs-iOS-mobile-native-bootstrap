@@ -17,7 +17,7 @@ the headless APIs, but there was no end-to-end example. This is one.
 
 | Chapter | | Status |
 |---|---|---|
-| 00 | Introduction | Planned |
+| [00](docs/tutorial/00-introduction.md) | Introduction | ✅ |
 | [01](docs/tutorial/01-run-liferay.md) | Run Liferay DXP 2026.Q1 locally | ✅ Verified on 2026.q1.14-lts |
 | [02](docs/tutorial/02-configure-liferay.md) | Configure Liferay for a self-service user | ✅ Verified on 2026.q1.14-lts |
 | [03](docs/tutorial/03-create-ios-project.md) | Create the iOS project | ✅ Built by CI with Xcode 26.6; launches to the sign-in screen |
@@ -26,9 +26,11 @@ the headless APIs, but there was no end-to-end example. This is one.
 | [06](docs/tutorial/06-my-profile.md) | My Profile (system object: User) | 🧪 API checked live in CI; screen built and screenshotted in demo mode |
 | [07](docs/tutorial/07-my-addresses.md) | My Addresses (system object: Postal Address) | 🧪 API checked live in CI; screen built and screenshotted in demo mode |
 | [08](docs/tutorial/08-service-requests.md) | Service Requests (custom object) | 🧪 API checked live in CI; screen built and screenshotted in demo mode |
-| 09–11 | Testing, production hardening, next steps | Planned |
+| [09](docs/tutorial/09-testing.md) | Testing | ✅ All four test levels run in CI |
+| [10](docs/tutorial/10-production-hardening.md) | Production hardening | 📝 Checklist; token defaults read from the 2026.Q1 source |
+| [11](docs/tutorial/11-next-steps.md) | Next steps | 📝 |
 
-The full plan, architecture and decisions are in [`docs/TUTORIAL_OUTLINE.md`](docs/TUTORIAL_OUTLINE.md).
+**Start here: [00 — Introduction](docs/tutorial/00-introduction.md).** The plan, architecture and decisions are in [`docs/TUTORIAL_OUTLINE.md`](docs/TUTORIAL_OUTLINE.md).
 
 ## Quick start (Liferay side)
 
