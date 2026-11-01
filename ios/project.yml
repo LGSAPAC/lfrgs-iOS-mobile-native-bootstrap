@@ -1,0 +1,53 @@
+# XcodeGen spec for the app project (https://github.com/yonaskolb/XcodeGen).
+#
+# The generated LiferaySelfService.xcodeproj is committed, so readers just open it. Maintainers
+# regenerate it after changing this file:   cd ios && xcodegen generate
+
+name: LiferaySelfService
+options:
+  bundleIdPrefix: com.liferay.sample
+  deploymentTarget:
+    iOS: "17.0"
+  createIntermediateGroups: true
+
+packages:
+  LiferayKit:
+    path: LiferayKit
+
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+
+targets:
+  LiferaySelfService:
+    type: application
+    platform: iOS
+    sources:
+      - path: LiferaySelfService
+    configFiles:
+      Debug: Config/Shared.xcconfig
+      Release: Config/Shared.xcconfig
+    dependencies:
+      - package: LiferayKit
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.liferay.sample.selfservice
+        MARKETING_VERSION: "1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        TARGETED_DEVICE_FAMILY: "1"
+        INFOPLIST_FILE: LiferaySelfService/Info.plist
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: Liferay Self-Service
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+        # Set your team in Xcode (Signing & Capabilities) to run on a device.
+        CODE_SIGN_STYLE: Automatic
+
+schemes:
+  LiferaySelfService:
+    build:
+      targets:
+        LiferaySelfService: all
+    run:
+      config: Debug
