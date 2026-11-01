@@ -1,0 +1,79 @@
+{
+  "actions": {},
+  "facets": [],
+  "items": [
+    {
+      "active": true,
+      "countryId": 20377,
+      "id": 6024,
+      "name": "Alabama",
+      "position": 0.0,
+      "regionCode": "AL",
+      "title_i18n": {
+        "sv_SE": "Alabama",
+        "pt_BR": "Alabama",
+        "fr_FR": "Alabama",
+        "ja_JP": "Alabama",
+        "ca_ES": "Alabama",
+        "de_DE": "Alabama",
+        "hu_HU": "Alabama",
+        "ar_SA": "Alabama",
+        "fi_FI": "Alabama",
+        "en_US": "Alabama",
+        "zh_CN": "Alabama",
+        "es_ES": "Alabama",
+        "nl_NL": "Alabama"
+      }
+    },
+    {
+      "active": true,
+      "countryId": 20377,
+      "id": 6025,
+      "name": "Alaska",
+      "position": 0.0,
+      "regionCode": "AK",
+      "title_i18n": {
+        "sv_SE": "Alaska",
+        "pt_BR": "Alaska",
+        "fr_FR": "Alaska",
+        "ja_JP": "Alaska",
+        "ca_ES": "Alaska",
+        "de_DE": "Alaska",
+        "hu_HU": "Alaska",
+        "ar_SA": "Alaska",
+        "fi_FI": "Alaska",
+        "en_US": "Alaska",
+        "zh_CN": "Alaska",
+        "es_ES": "Alaska",
+        "nl_NL": "Alaska"
+      }
+    },
+    {
+      "active": true,
+      "countryId": 20377,
+      "id": 6026,
+      "name": "American Samoa",
+      "position": 0.0,
+      "regionCode": "AS",
+      "title_i18n": {
+        "sv_SE": "American Samoa",
+        "pt_BR": "American Samoa",
+        "fr_FR": "American Samoa",
+        "ja_JP": "American Samoa",
+        "ca_ES": "American Samoa",
+        "de_DE": "American Samoa",
+        "hu_HU": "American Samoa",
+        "ar_SA": "American Samoa",
+        "fi_FI": "American Samoa",
+        "en_US": "American Samoa",
+        "zh_CN": "American Samoa",
+        "es_ES": "American Samoa",
+        "nl_NL": "American Samoa"
+      }
+    }
+  ],
+  "lastPage": 19,
+  "page": 1,
+  "pageSize": 3,
+  "totalCount": 57
+}

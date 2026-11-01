@@ -71,7 +71,7 @@ curl -fsS -H "Authorization: Bearer $access_token" \
 
 # 4. Refresh. By default Liferay returns the same refresh token; store whichever one the response holds.
 #    Note: Liferay 2026.Q1 has no token revocation endpoint (RFC 7009). The app signs out by deleting
-#    its tokens; users and admins can revoke an app's authorization in Liferay's UI.
+#    its tokens; an admin can revoke a user's authorization in OAuth 2 Administration.
 if [[ -n "$refresh_token" ]]; then
 	echo; echo "6) Refreshing the access token:"
 	refreshed=$(curl -fsS "$LIFERAY_URL/o/oauth2/token" \

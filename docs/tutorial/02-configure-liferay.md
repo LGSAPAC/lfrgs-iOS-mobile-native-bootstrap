@@ -146,6 +146,30 @@ Read the script alongside this section; it is the API contract for chapters 06â€
 Picklist values are **sent** as `{"key": "open"}` and **returned** as `{"key": "open", "name": "Open"}`.
 `name` is localized to the request's `Accept-Language`.
 
+> **Gotcha: unknown picklist keys return `403 Forbidden`.** Sending a key that isn't in the picklist
+> (for example `{"key": "nope"}`) does not return a validation error. Liferay answers with a generic
+> `403 Forbidden`. The app therefore only ever sends keys from the picklist, and a 403 on create does
+> not necessarily mean "permission denied".
+
+Other details of the responses that the Swift models must handle:
+
+- Dates come in two formats: `dateCreated` is `2026-11-01T03:40:37Z`, but a Date field such as `dueDate`
+  (sent as `2026-12-31`) comes back as `2026-12-31T00:00:00.000Z`, with fractional seconds.
+- Lists are pages: `items`, `page`, `pageSize`, `totalCount`, `lastPage` (plus `actions` and `facets`).
+- Errors have a JSON body `{"status": "BAD_REQUEST", "title": "No value was provided for required object field \"title\""}`,
+  **except `401`**, whose body is empty.
+
+### Recorded responses
+
+[`scripts/record-fixtures.sh`](../../liferay/scripts/record-fixtures.sh) saves the real response to
+every call above as JSON, in `ios/LiferayKit/Tests/LiferayKitTests/Fixtures/`. The Swift unit tests
+(chapter 09) decode these files, so the app is tested against what Liferay 2026.Q1 actually returns.
+Re-run it when you upgrade Liferay:
+
+```bash
+OAUTH_CLIENT_ID=id-xxxxxxxx ./scripts/record-fixtures.sh   # OAUTH_CLIENT_ID is optional
+```
+
 ## 3. Create the OAuth 2 application
 
 The app signs users in with **OAuth 2 Authorization Code + PKCE**, the flow recommended for native

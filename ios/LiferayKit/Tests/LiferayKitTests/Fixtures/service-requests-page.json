@@ -1,0 +1,221 @@
+{
+  "actions": {
+    "create": {
+      "method": "POST",
+      "href": "http://localhost:8080/o/c/servicerequests/"
+    },
+    "createBatch": {
+      "method": "POST",
+      "href": "http://localhost:8080/o/c/servicerequests/batch"
+    }
+  },
+  "facets": [],
+  "items": [
+    {
+      "actions": {
+        "versions": {
+          "method": "GET",
+          "href": "http://localhost:8080/o/c/servicerequests/by-external-reference-code/fixture-sr-0001/versions"
+        },
+        "permissions": {
+          "method": "GET",
+          "href": "http://localhost:8080/o/c/servicerequests/34945/permissions"
+        },
+        "get": {
+          "method": "GET",
+          "href": "http://localhost:8080/o/c/servicerequests/34945"
+        },
+        "replace": {
+          "method": "PUT",
+          "href": "http://localhost:8080/o/c/servicerequests/34945"
+        },
+        "update": {
+          "method": "PATCH",
+          "href": "http://localhost:8080/o/c/servicerequests/34945"
+        },
+        "delete": {
+          "method": "DELETE",
+          "href": "http://localhost:8080/o/c/servicerequests/34945"
+        }
+      },
+      "creator": {
+        "additionalName": "",
+        "contentType": "UserAccount",
+        "externalReferenceCode": "TUTORIAL_USER_JANE",
+        "familyName": "Doe",
+        "givenName": "Jane",
+        "id": 34267,
+        "name": "Jane Doe"
+      },
+      "dateCreated": "2026-11-01T03:42:44Z",
+      "dateModified": "2026-11-01T03:42:46Z",
+      "defaultLanguageId": "en_US",
+      "externalReferenceCode": "fixture-sr-0001",
+      "friendlyUrlPath": "fixture-vpn-keeps-disconnecting",
+      "friendlyUrlPath_i18n": {
+        "en_US": "fixture-vpn-keeps-disconnecting"
+      },
+      "id": 34945,
+      "keywords": [],
+      "objectEntryFolderExternalReferenceCode": "",
+      "objectEntryFolderId": 0,
+      "scopeId": 0,
+      "status": {
+        "code": 0,
+        "label": "approved",
+        "label_i18n": "Approved"
+      },
+      "taxonomyCategoryBriefs": [],
+      "dueDate": "2026-12-31T00:00:00.000Z",
+      "description": "Recorded by record-fixtures.sh",
+      "category": {
+        "key": "technical",
+        "name": "Technical"
+      },
+      "priority": 1,
+      "title": "Fixture: VPN keeps disconnecting",
+      "requestStatus": {
+        "key": "inProgress",
+        "name": "In Progress"
+      }
+    },
+    {
+      "actions": {
+        "versions": {
+          "method": "GET",
+          "href": "http://localhost:8080/o/c/servicerequests/by-external-reference-code/2ce2ee59-287c-e639-0cc1-6937359c0f51/versions"
+        },
+        "permissions": {
+          "method": "GET",
+          "href": "http://localhost:8080/o/c/servicerequests/34786/permissions"
+        },
+        "get": {
+          "method": "GET",
+          "href": "http://localhost:8080/o/c/servicerequests/34786"
+        },
+        "replace": {
+          "method": "PUT",
+          "href": "http://localhost:8080/o/c/servicerequests/34786"
+        },
+        "update": {
+          "method": "PATCH",
+          "href": "http://localhost:8080/o/c/servicerequests/34786"
+        },
+        "delete": {
+          "method": "DELETE",
+          "href": "http://localhost:8080/o/c/servicerequests/34786"
+        }
+      },
+      "creator": {
+        "additionalName": "",
+        "contentType": "UserAccount",
+        "externalReferenceCode": "TUTORIAL_USER_JANE",
+        "familyName": "Doe",
+        "givenName": "Jane",
+        "id": 34267,
+        "name": "Jane Doe"
+      },
+      "dateCreated": "2026-11-01T00:45:40Z",
+      "dateModified": "2026-11-01T00:45:40Z",
+      "defaultLanguageId": "en_US",
+      "externalReferenceCode": "2ce2ee59-287c-e639-0cc1-6937359c0f51",
+      "friendlyUrlPath": "update-billing-address",
+      "friendlyUrlPath_i18n": {
+        "en_US": "update-billing-address"
+      },
+      "id": 34786,
+      "keywords": [],
+      "objectEntryFolderExternalReferenceCode": "",
+      "objectEntryFolderId": 0,
+      "scopeId": 0,
+      "status": {
+        "code": 0,
+        "label": "approved",
+        "label_i18n": "Approved"
+      },
+      "taxonomyCategoryBriefs": [],
+      "description": "",
+      "category": {
+        "key": "billing",
+        "name": "Billing"
+      },
+      "priority": 2,
+      "title": "Update billing address",
+      "requestStatus": {
+        "key": "inProgress",
+        "name": "In Progress"
+      }
+    },
+    {
+      "actions": {
+        "versions": {
+          "method": "GET",
+          "href": "http://localhost:8080/o/c/servicerequests/by-external-reference-code/cfcd604b-57d5-40b3-ff46-ce2355ffd5a2/versions"
+        },
+        "permissions": {
+          "method": "GET",
+          "href": "http://localhost:8080/o/c/servicerequests/34782/permissions"
+        },
+        "get": {
+          "method": "GET",
+          "href": "http://localhost:8080/o/c/servicerequests/34782"
+        },
+        "replace": {
+          "method": "PUT",
+          "href": "http://localhost:8080/o/c/servicerequests/34782"
+        },
+        "update": {
+          "method": "PATCH",
+          "href": "http://localhost:8080/o/c/servicerequests/34782"
+        },
+        "delete": {
+          "method": "DELETE",
+          "href": "http://localhost:8080/o/c/servicerequests/34782"
+        }
+      },
+      "creator": {
+        "additionalName": "",
+        "contentType": "UserAccount",
+        "externalReferenceCode": "TUTORIAL_USER_JANE",
+        "familyName": "Doe",
+        "givenName": "Jane",
+        "id": 34267,
+        "name": "Jane Doe"
+      },
+      "dateCreated": "2026-11-01T00:45:38Z",
+      "dateModified": "2026-11-01T00:45:38Z",
+      "defaultLanguageId": "en_US",
+      "externalReferenceCode": "cfcd604b-57d5-40b3-ff46-ce2355ffd5a2",
+      "friendlyUrlPath": "printer-not-working",
+      "friendlyUrlPath_i18n": {
+        "en_US": "printer-not-working"
+      },
+      "id": 34782,
+      "keywords": [],
+      "objectEntryFolderExternalReferenceCode": "",
+      "objectEntryFolderId": 0,
+      "scopeId": 0,
+      "status": {
+        "code": 0,
+        "label": "approved",
+        "label_i18n": "Approved"
+      },
+      "taxonomyCategoryBriefs": [],
+      "description": "",
+      "category": {
+        "key": "technical",
+        "name": "Technical"
+      },
+      "priority": 1,
+      "title": "Printer not working",
+      "requestStatus": {
+        "key": "open",
+        "name": "Open"
+      }
+    }
+  ],
+  "lastPage": 1,
+  "page": 1,
+  "pageSize": 20,
+  "totalCount": 3
+}

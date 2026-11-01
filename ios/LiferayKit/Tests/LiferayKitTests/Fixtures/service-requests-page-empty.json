@@ -1,0 +1,18 @@
+{
+  "actions": {
+    "create": {
+      "method": "POST",
+      "href": "http://localhost:8080/o/c/servicerequests/"
+    },
+    "createBatch": {
+      "method": "POST",
+      "href": "http://localhost:8080/o/c/servicerequests/batch"
+    }
+  },
+  "facets": [],
+  "items": [],
+  "lastPage": 1,
+  "page": 1,
+  "pageSize": 20,
+  "totalCount": 0
+}

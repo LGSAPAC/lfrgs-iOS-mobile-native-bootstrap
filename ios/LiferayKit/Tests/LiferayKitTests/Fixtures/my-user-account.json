@@ -1,0 +1,83 @@
+{
+  "accountBriefs": [],
+  "actions": {
+    "get-user-account-by-external-reference-code": {
+      "method": "GET",
+      "href": "http://localhost:8080/o/headless-admin-user/v1.0/user-accounts/by-external-reference-code/{externalReferenceCode}"
+    },
+    "put-user-account": {
+      "method": "PUT",
+      "href": "http://localhost:8080/o/headless-admin-user/v1.0/user-accounts/34267"
+    },
+    "delete-user-account": {
+      "method": "DELETE",
+      "href": "http://localhost:8080/o/headless-admin-user/v1.0/user-accounts/34267"
+    },
+    "get-user-account": {
+      "method": "GET",
+      "href": "http://localhost:8080/o/headless-admin-user/v1.0/user-accounts/34267"
+    },
+    "delete-user-account-by-external-reference-code": {
+      "method": "DELETE",
+      "href": "http://localhost:8080/o/headless-admin-user/v1.0/user-accounts/by-external-reference-code/{externalReferenceCode}"
+    },
+    "put-user-account-by-external-reference-code": {
+      "method": "PUT",
+      "href": "http://localhost:8080/o/headless-admin-user/v1.0/user-accounts/by-external-reference-code/{externalReferenceCode}"
+    },
+    "get-my-user-account": {
+      "method": "GET",
+      "href": "http://localhost:8080/o/headless-admin-user/v1.0/my-user-account"
+    },
+    "patch-user-account": {
+      "method": "PATCH",
+      "href": "http://localhost:8080/o/headless-admin-user/v1.0/user-accounts/34267"
+    }
+  },
+  "additionalName": "",
+  "alternateName": "jane.doe",
+  "birthDate": "1977-01-01T00:00:00Z",
+  "customFields": [],
+  "dashboardURL": "/user/jane.doe",
+  "dateCreated": "2026-11-01T00:31:48Z",
+  "dateModified": "2026-11-01T03:42:12Z",
+  "emailAddress": "jane.doe@example.com",
+  "externalReferenceCode": "TUTORIAL_USER_JANE",
+  "familyName": "Doe",
+  "givenName": "Jane",
+  "hasLoginDate": true,
+  "id": 34267,
+  "imageId": 0,
+  "jobTitle": "Customer",
+  "keywords": [],
+  "languageDisplayName": "English (United States)",
+  "languageId": "en_US",
+  "lastLoginDate": "2026-11-01T00:45:59Z",
+  "loginDate": "2026-11-01T00:46:35Z",
+  "name": "Jane Doe",
+  "organizationBriefs": [],
+  "profileURL": "/web/jane.doe",
+  "roleBriefs": [
+    {
+      "externalReferenceCode": "L_USER",
+      "id": 20114,
+      "key": "User",
+      "name": "User",
+      "roleType": 1
+    }
+  ],
+  "siteBriefs": [],
+  "status": "Active",
+  "userAccountContactInformation": {
+    "emailAddresses": [],
+    "facebook": "",
+    "jabber": "",
+    "postalAddresses": [],
+    "skype": "",
+    "sms": "",
+    "telephones": [],
+    "twitter": "",
+    "webUrls": []
+  },
+  "userGroupBriefs": []
+}

@@ -1,0 +1,25 @@
+{
+  "actions": {},
+  "facets": [],
+  "items": [
+    {
+      "addressCountry": "United States",
+      "addressLocality": "Diamond Bar",
+      "addressRegion": "California",
+      "addressSubtype": "",
+      "addressType": "personal",
+      "externalReferenceCode": "80391269-0b31-65e2-3259-898680425ba5",
+      "id": 34944,
+      "name": "Home",
+      "postalCode": "91765",
+      "primary": true,
+      "streetAddressLine1": "1400 Montefino Ave",
+      "streetAddressLine2": "",
+      "streetAddressLine3": ""
+    }
+  ],
+  "lastPage": 1,
+  "page": 1,
+  "pageSize": 1,
+  "totalCount": 1
+}

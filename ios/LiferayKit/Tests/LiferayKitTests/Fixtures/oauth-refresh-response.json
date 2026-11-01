@@ -1,0 +1,7 @@
+{
+  "access_token": "REDACTED-902-chars",
+  "token_type": "Bearer",
+  "expires_in": 600,
+  "scope": "c_servicerequest.everything Liferay.Headless.Admin.User.everything Liferay.Headless.Admin.Address.everything.read",
+  "refresh_token": "REDACTED-61-chars"
+}
