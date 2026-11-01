@@ -253,3 +253,12 @@ Findings from the live run, now reflected in chapters 01–02:
 - Regular users need **View + Create Token** on the OAuth 2 application, or they get "You do not have the required permissions".
 - The consent button is **Authorize**. Access tokens last 600 s. Refresh tokens are not rotated by default.
 - **There is no token revocation endpoint** (only `authorize`, `token`, `introspect`).
+
+## 7. Before making the repository public
+
+- [ ] Choose the Code of Conduct contact and replace the placeholder in `CODE_OF_CONDUCT.md`.
+- [ ] Turn on **private vulnerability reporting** (Settings → Code security), which `SECURITY.md` relies on.
+- [ ] Confirm the `Liferay` CI workflow is green on `main`.
+- [ ] Re-check the README status table and that every chapter's checkpoint still passes.
+- [ ] Decide whether a `NOTICE` file or copyright line is needed for Apache 2.0 under the publishing organisation.
+- [ ] Get internal sign-off, then change visibility (Settings → Danger Zone).

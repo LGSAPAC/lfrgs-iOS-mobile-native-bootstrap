@@ -1,0 +1,41 @@
+name: Tutorial problem
+description: A step, command or code sample doesn't work as written.
+labels: ["tutorial-problem"]
+body:
+  - type: input
+    id: chapter
+    attributes:
+      label: Chapter and step
+      placeholder: "02 — Configure Liferay, step 3c"
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what happened instead. Paste errors as text.
+    validations:
+      required: true
+  - type: input
+    id: liferay
+    attributes:
+      label: Liferay version
+      description: The Docker image tag, if you changed it.
+      placeholder: "liferay/dxp:2026.q1.14-lts"
+  - type: input
+    id: apple
+    attributes:
+      label: Xcode / iOS version (iOS chapters only)
+      placeholder: "Xcode X.Y, iOS X.Y Simulator (or device model)"
+  - type: input
+    id: host
+    attributes:
+      label: Host OS and Docker
+      placeholder: "macOS X.Y, Docker Desktop X.Y"
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I removed credentials, tokens and activation keys from anything I pasted.
+          required: true
