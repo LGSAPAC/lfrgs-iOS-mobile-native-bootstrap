@@ -281,4 +281,4 @@ Two behaviours to design the app around:
 - Jane reaches the **Authorize** screen, not a permissions error (step 3c).
 - You have noted the **Client ID**. Chapter 03 puts it in `ios/Config/Local.xcconfig`.
 
-Next: 03 — Create the iOS project *(coming next)*.
+Next: [03 — Create the iOS project](03-create-ios-project.md).

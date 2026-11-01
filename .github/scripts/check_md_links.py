@@ -14,8 +14,9 @@ skip = ("http://", "https://", "mailto:", "#")
 errors = []
 
 for md in sorted(root.rglob("*.md")):
-    if ".git" in md.parts or "node_modules" in md.parts:
-        continue
+    relative_parts = md.relative_to(root).parts
+    if any(part.startswith(".") for part in relative_parts[:-1]) or "node_modules" in relative_parts:
+        continue  # .git, .build and other hidden or generated folders
     in_code = False
     for number, line in enumerate(md.read_text(encoding="utf-8").splitlines(), 1):
         if line.lstrip().startswith("```"):

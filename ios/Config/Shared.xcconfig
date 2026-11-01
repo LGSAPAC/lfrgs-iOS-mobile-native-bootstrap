@@ -1,0 +1,4 @@
+// Build settings for the LiferaySelfService app target (chapter 03).
+// Your own values go in Local.xcconfig, which is git-ignored. Copy Local.xcconfig.example to start.
+
+#include? "Local.xcconfig"

@@ -1,0 +1,8 @@
+// Copy to Local.xcconfig (git-ignored) and fill in your values.
+//
+// Careful: in .xcconfig files "//" starts a comment, so a URL must be written as
+// http:/$()/localhost:8080 — the empty $() breaks up the "//".
+
+LIFERAY_BASE_URL = http:/$()/localhost:8080
+OAUTH_CLIENT_ID = id-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+OAUTH_REDIRECT_URI = com.liferay.sample.selfservice:/$()/oauth2redirect

@@ -20,10 +20,10 @@ the headless APIs, but there was no end-to-end example. This is one.
 | 00 | Introduction | Planned |
 | [01](docs/tutorial/01-run-liferay.md) | Run Liferay DXP 2026.Q1 locally | ✅ Verified on 2026.q1.14-lts |
 | [02](docs/tutorial/02-configure-liferay.md) | Configure Liferay for a self-service user | ✅ Verified on 2026.q1.14-lts |
-| 03 | Create the iOS project | Next |
-| 04 | Sign in with OAuth 2 + PKCE | Planned |
-| 05 | A small, correct API client | Planned |
-| 06–08 | Profile, addresses and Service Requests (CRUD) | Planned |
+| [03](docs/tutorial/03-create-ios-project.md) | Create the iOS project | 📝 Written; Xcode steps not yet run on a Mac |
+| [04](docs/tutorial/04-sign-in-oauth-pkce.md) | Sign in with OAuth 2 + PKCE | 🧪 OAuth/PKCE code unit-tested; sign-in sheet not yet run |
+| [05](docs/tutorial/05-api-client.md) | A small, correct API client | 🧪 Unit-tested against recorded Liferay responses |
+| 06–08 | Profile, addresses and Service Requests (CRUD) | Next |
 | 09–11 | Testing, production hardening, next steps | Planned |
 
 The full plan, architecture and decisions are in [`docs/TUTORIAL_OUTLINE.md`](docs/TUTORIAL_OUTLINE.md).
@@ -58,7 +58,10 @@ liferay/                 Local Liferay: Docker Compose, setup data, scripts
   scripts/smoke-test.sh    API checks as the self-service users
   scripts/oauth-pkce-test.sh   Manual OAuth 2 + PKCE walkthrough
   scripts/record-fixtures.sh   Records real API responses for the Swift tests
-ios/                     The iOS app (in progress); LiferayKit test fixtures
+ios/
+  LiferayKit/              Swift package: OAuth 2 + PKCE, token session, API client, models, tests
+  LiferaySelfService/      SwiftUI app sources (the .xcodeproj is created in chapter 03)
+  Config/                  Shared.xcconfig + Local.xcconfig.example (your Client ID)
 .github/                 CI, issue and pull request templates
 ```
 

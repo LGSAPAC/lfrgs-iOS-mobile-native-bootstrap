@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- Filled in from Config/Local.xcconfig at build time; read by LiferayConfiguration(bundle:). -->
+	<key>LiferayBaseURL</key>
+	<string>$(LIFERAY_BASE_URL)</string>
+	<key>OAuthClientID</key>
+	<string>$(OAUTH_CLIENT_ID)</string>
+	<key>OAuthRedirectURI</key>
+	<string>$(OAUTH_REDIRECT_URI)</string>
+	<!-- Plain HTTP to localhost for the local Liferay. A real server must use HTTPS (chapter 10). -->
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsLocalNetworking</key>
+		<true/>
+	</dict>
+</dict>
+</plist>
