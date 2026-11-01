@@ -111,3 +111,12 @@ jobs:
       - name: Liferay logs
         if: failure()
         run: docker compose logs --tail 300 liferay
+
+      - name: Diagnostics (runner resources and Liferay threads)
+        if: failure()
+        run: |
+          echo "--- runner: $(nproc) CPUs"; free -m
+          echo "--- containers"; docker stats --no-stream
+          echo "--- Liferay request threads (Java thread dump)"
+          docker compose exec -T liferay sh -c 'jcmd "$(pgrep -f org.apache.catalina.startup.Bootstrap | head -1)" Thread.print' \
+            | awk '/^"http-nio-8080-exec/{p=1} /^$/{p=0} p' | head -150 || true

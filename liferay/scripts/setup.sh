@@ -64,12 +64,17 @@ api() {
 wait_for_liferay() {
 	log "Waiting for Liferay at $LIFERAY_URL (first start can take several minutes)"
 
-	for attempt in $(seq 1 $((WAIT_MINUTES * 12))); do
-		(( attempt % 12 == 0 )) && echo "  still waiting ($((attempt / 12)) min)…"
-		if curl -fsS -o /dev/null --max-time 15 -u "$ADMIN_USER:$ADMIN_PASSWORD" \
+	local deadline=$((SECONDS + WAIT_MINUTES * 60)) next_report=$((SECONDS + 60))
+	while (( SECONDS < deadline )); do
+		# -s: the expected "connection refused/timed out" while starting isn't worth printing.
+		if curl -fs -o /dev/null --max-time 15 -u "$ADMIN_USER:$ADMIN_PASSWORD" \
 			"$LIFERAY_URL/o/headless-admin-user/v1.0/my-user-account"; then
-			echo "Liferay is up."
+			echo "Liferay is up after $((SECONDS / 60))m $((SECONDS % 60))s."
 			return
+		fi
+		if (( SECONDS >= next_report )); then
+			echo "  still waiting ($((SECONDS / 60)) min)…"
+			next_report=$((next_report + 60))
 		fi
 		sleep 5
 	done
