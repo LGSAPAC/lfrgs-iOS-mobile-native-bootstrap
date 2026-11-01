@@ -78,6 +78,16 @@ jobs:
           mkdir -p "$RUNNER_TEMP/artifacts"
           xcrun simctl io "$udid" screenshot "$RUNNER_TEMP/artifacts/sign-in-screen.png"
 
+      - name: Print the generated project and a small screenshot (for review without downloading)
+        run: |
+          echo "=== BEGIN project.pbxproj ==="
+          cat LiferaySelfService.xcodeproj/project.pbxproj
+          echo "=== END project.pbxproj ==="
+          sips -Z 640 "$RUNNER_TEMP/artifacts/sign-in-screen.png" --out "$RUNNER_TEMP/small.png" >/dev/null
+          echo "=== BEGIN screenshot base64 ==="
+          base64 -i "$RUNNER_TEMP/small.png" | fold -w 1000
+          echo "=== END screenshot base64 ==="
+
       - name: Package the generated project
         if: always()
         run: |
