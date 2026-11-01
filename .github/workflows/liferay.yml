@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: shellcheck
         run: shellcheck -x -S style liferay/scripts/*.sh
@@ -49,7 +49,7 @@ jobs:
       run:
         working-directory: ios/LiferayKit
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: swift test
         run: swift test
@@ -62,7 +62,7 @@ jobs:
       run:
         working-directory: liferay
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Start Liferay DXP
         run: docker compose up -d
@@ -102,7 +102,7 @@ jobs:
 
       - name: Upload recorded fixtures
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: recorded-fixtures
           path: ${{ runner.temp }}/fixtures
