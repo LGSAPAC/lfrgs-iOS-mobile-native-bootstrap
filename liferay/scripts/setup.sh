@@ -19,6 +19,7 @@ LIFERAY_URL="${LIFERAY_URL:-http://localhost:8080}"
 ADMIN_USER="${ADMIN_USER:-test@liferay.com}"
 ADMIN_PASSWORD="${ADMIN_PASSWORD:-test}"
 TUTORIAL_USER_PASSWORD="${TUTORIAL_USER_PASSWORD:-Tutorial-2026!}"
+WAIT_MINUTES="${WAIT_MINUTES:-10}"
 
 SETUP_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../setup" && pwd)"
 
@@ -56,7 +57,7 @@ api() {
 wait_for_liferay() {
 	log "Waiting for Liferay at $LIFERAY_URL (first start can take several minutes)"
 
-	for _ in $(seq 1 120); do
+	for _ in $(seq 1 $((WAIT_MINUTES * 12))); do
 		if curl -fsS -o /dev/null -u "$ADMIN_USER:$ADMIN_PASSWORD" \
 			"$LIFERAY_URL/o/headless-admin-user/v1.0/my-user-account"; then
 			echo "Liferay is up."
@@ -65,7 +66,7 @@ wait_for_liferay() {
 		sleep 5
 	done
 
-	echo "error: Liferay did not become ready in 10 minutes" >&2
+	echo "error: Liferay did not become ready in $WAIT_MINUTES minutes" >&2
 	exit 1
 }
 

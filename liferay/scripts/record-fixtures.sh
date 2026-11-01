@@ -169,4 +169,4 @@ fi
 } >"$OUT/README.md"
 rm -f "$INDEX"
 
-echo "Done: $(ls "$OUT"/*.json | wc -l) fixtures." >&2
+echo "Done: $(find "$OUT" -name '*.json' | wc -l) fixtures." >&2

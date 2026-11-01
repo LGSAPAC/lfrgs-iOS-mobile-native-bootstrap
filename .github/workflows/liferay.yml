@@ -1,0 +1,82 @@
+name: Liferay
+
+# Keeps the tutorial honest: starts the same Liferay DXP 2026.Q1 container readers use, runs the
+# setup script twice (it must be safe to re-run), then checks every API call the app depends on.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: Lint scripts and docs
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: shellcheck
+        run: shellcheck -x -S style liferay/scripts/*.sh
+
+      - name: JSON files are valid
+        run: |
+          status=0
+          while IFS= read -r -d '' file; do
+            jq empty "$file" || { echo "::error file=$file::invalid JSON"; status=1; }
+          done < <(find . -name '*.json' -not -path './.git/*' -print0)
+          exit $status
+
+      - name: Relative Markdown links resolve
+        run: python3 .github/scripts/check_md_links.py
+
+  liferay-api:
+    name: Liferay API smoke test
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: liferay
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Start Liferay DXP
+        run: docker compose up -d
+
+      - name: Configure Liferay (first run)
+        run: ./scripts/setup.sh
+        env:
+          WAIT_MINUTES: 20
+
+      - name: Configure Liferay again (must be idempotent)
+        run: ./scripts/setup.sh
+
+      - name: Smoke test as the self-service users
+        run: ./scripts/smoke-test.sh
+
+      - name: Record fixtures and compare their shape
+        run: |
+          ./scripts/record-fixtures.sh "$RUNNER_TEMP/fixtures"
+          # Ids and dates differ between runs; compare only the JSON structure (sorted key paths).
+          shape() { jq -c '[paths | map(if type == "number" then 0 else . end)] | unique' "$1"; }
+          status=0
+          for recorded in "$RUNNER_TEMP"/fixtures/*.json; do
+            committed="../ios/LiferayKit/Tests/LiferayKitTests/Fixtures/$(basename "$recorded")"
+            if ! diff <(shape "$committed") <(shape "$recorded") >/dev/null; then
+              echo "::error file=$committed::Response shape changed; re-run liferay/scripts/record-fixtures.sh"
+              status=1
+            fi
+          done
+          exit $status
+
+      - name: Liferay logs
+        if: failure()
+        run: docker compose logs --tail 300 liferay

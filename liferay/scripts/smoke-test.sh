@@ -44,7 +44,7 @@ jane_id=$(jq -r '.id' <<<"$BODY")
 
 call "$JANE" PATCH "$USER_API/user-accounts/$jane_id" '{"jobTitle": "Smoke Tester"}'
 expect 200 "PATCH own user account (jobTitle)"
-[[ "$(jq -r '.jobTitle' <<<"$BODY")" == "Smoke Tester" ]] && pass "jobTitle updated" || fail "jobTitle not updated"
+if [[ "$(jq -r '.jobTitle' <<<"$BODY")" == "Smoke Tester" ]]; then pass "jobTitle updated"; else fail "jobTitle not updated"; fi
 call "$JANE" PATCH "$USER_API/user-accounts/$jane_id" '{"jobTitle": "Customer"}'
 
 echo "System object: Postal addresses (as Jane)"
@@ -62,7 +62,7 @@ expect 200 "Create postal address via PATCH user account"
 
 call "$JANE" GET "$USER_API/user-accounts/$jane_id/postal-addresses"
 address_id=$(jq -r '[.items[] | select(.postalCode == "91765")][0].id // empty' <<<"$BODY")
-[[ -n "$address_id" ]] && pass "New address listed (id=$address_id)" || fail "New address not found"
+if [[ -n "$address_id" ]]; then pass "New address listed (id=$address_id)"; else fail "New address not found"; fi
 
 if [[ -n "$address_id" ]]; then
 	call "$JANE" PATCH "$USER_API/postal-addresses/$address_id" '{"addressLocality": "Walnut"}'
@@ -87,8 +87,7 @@ jq -c '{id, title, category, requestStatus, creator: .creator.name}' <<<"$BODY" 
 
 call "$JANE" GET "$SR_API?sort=dateCreated:desc&filter=requestStatus%20eq%20'open'&pageSize=5"
 expect 200 "GET service requests (filter + sort)"
-jq -e --argjson id "${sr_id:-0}" '[.items[].id] | index($id) != null' <<<"$BODY" >/dev/null &&
-	pass "Jane sees her request in the list" || fail "Jane's request missing from list"
+if jq -e --argjson id "${sr_id:-0}" '[.items[].id] | index($id) != null' <<<"$BODY" >/dev/null; then pass "Jane sees her request in the list"; else fail "Jane's request missing from list"; fi
 
 call "$JANE" PATCH "$SR_API/$sr_id" '{"requestStatus": {"key": "inProgress"}}'
 expect 200 "PATCH service request status"
@@ -96,16 +95,13 @@ expect 200 "PATCH service request status"
 echo "Isolation (as John)"
 call "$JOHN" GET "$SR_API?pageSize=50"
 expect 200 "GET service requests as John"
-jq -e --argjson id "${sr_id:-0}" '[.items[].id] | index($id) == null' <<<"$BODY" >/dev/null &&
-	pass "John does not see Jane's request in the list" || fail "John can see Jane's request"
+if jq -e --argjson id "${sr_id:-0}" '[.items[].id] | index($id) == null' <<<"$BODY" >/dev/null; then pass "John does not see Jane's request in the list"; else fail "John can see Jane's request"; fi
 
 call "$JOHN" GET "$SR_API/$sr_id"
-[[ "$STATUS" == "403" || "$STATUS" == "404" ]] && pass "John cannot read Jane's request (HTTP $STATUS)" ||
-	fail "John read Jane's request (HTTP $STATUS)"
+if [[ "$STATUS" == "403" || "$STATUS" == "404" ]]; then pass "John cannot read Jane's request (HTTP $STATUS)"; else fail "John read Jane's request (HTTP $STATUS)"; fi
 
 call "$JOHN" DELETE "$SR_API/$sr_id"
-[[ "$STATUS" == "403" || "$STATUS" == "404" ]] && pass "John cannot delete Jane's request (HTTP $STATUS)" ||
-	fail "John deleted Jane's request (HTTP $STATUS)"
+if [[ "$STATUS" == "403" || "$STATUS" == "404" ]]; then pass "John cannot delete Jane's request (HTTP $STATUS)"; else fail "John deleted Jane's request (HTTP $STATUS)"; fi
 
 echo "Cleanup (as Jane)"
 call "$JANE" DELETE "$SR_API/$sr_id"
