@@ -1,0 +1,23 @@
+[
+  {
+    "externalReferenceCode": "SERVICE_REQUEST_CATEGORY",
+    "name": "Service Request Category",
+    "name_i18n": { "en_US": "Service Request Category" },
+    "listTypeEntries": [
+      { "externalReferenceCode": "SR_CATEGORY_ACCOUNT", "key": "account", "name": "Account", "name_i18n": { "en_US": "Account" } },
+      { "externalReferenceCode": "SR_CATEGORY_BILLING", "key": "billing", "name": "Billing", "name_i18n": { "en_US": "Billing" } },
+      { "externalReferenceCode": "SR_CATEGORY_TECHNICAL", "key": "technical", "name": "Technical", "name_i18n": { "en_US": "Technical" } },
+      { "externalReferenceCode": "SR_CATEGORY_OTHER", "key": "other", "name": "Other", "name_i18n": { "en_US": "Other" } }
+    ]
+  },
+  {
+    "externalReferenceCode": "SERVICE_REQUEST_STATUS",
+    "name": "Service Request Status",
+    "name_i18n": { "en_US": "Service Request Status" },
+    "listTypeEntries": [
+      { "externalReferenceCode": "SR_STATUS_OPEN", "key": "open", "name": "Open", "name_i18n": { "en_US": "Open" } },
+      { "externalReferenceCode": "SR_STATUS_IN_PROGRESS", "key": "inProgress", "name": "In Progress", "name_i18n": { "en_US": "In Progress" } },
+      { "externalReferenceCode": "SR_STATUS_CLOSED", "key": "closed", "name": "Closed", "name_i18n": { "en_US": "Closed" } }
+    ]
+  }
+]

@@ -1,0 +1,75 @@
+{
+  "externalReferenceCode": "SERVICE_REQUEST",
+  "name": "ServiceRequest",
+  "label": { "en_US": "Service Request" },
+  "pluralLabel": { "en_US": "Service Requests" },
+  "scope": "company",
+  "panelCategoryKey": "control_panel.object",
+  "titleObjectFieldName": "title",
+  "objectFields": [
+    {
+      "externalReferenceCode": "SR_FIELD_TITLE",
+      "name": "title",
+      "label": { "en_US": "Title" },
+      "businessType": "Text",
+      "DBType": "String",
+      "required": true,
+      "indexed": true,
+      "indexedAsKeyword": false,
+      "indexedLanguageId": "en_US"
+    },
+    {
+      "externalReferenceCode": "SR_FIELD_DESCRIPTION",
+      "name": "description",
+      "label": { "en_US": "Description" },
+      "businessType": "LongText",
+      "DBType": "Clob",
+      "required": false,
+      "indexed": true,
+      "indexedAsKeyword": false,
+      "indexedLanguageId": "en_US"
+    },
+    {
+      "externalReferenceCode": "SR_FIELD_CATEGORY",
+      "name": "category",
+      "label": { "en_US": "Category" },
+      "businessType": "Picklist",
+      "DBType": "String",
+      "listTypeDefinitionExternalReferenceCode": "SERVICE_REQUEST_CATEGORY",
+      "required": true,
+      "indexed": true,
+      "indexedAsKeyword": true
+    },
+    {
+      "externalReferenceCode": "SR_FIELD_REQUEST_STATUS",
+      "name": "requestStatus",
+      "label": { "en_US": "Request Status" },
+      "businessType": "Picklist",
+      "DBType": "String",
+      "listTypeDefinitionExternalReferenceCode": "SERVICE_REQUEST_STATUS",
+      "required": true,
+      "indexed": true,
+      "indexedAsKeyword": true
+    },
+    {
+      "externalReferenceCode": "SR_FIELD_PRIORITY",
+      "name": "priority",
+      "label": { "en_US": "Priority" },
+      "businessType": "Integer",
+      "DBType": "Integer",
+      "required": false,
+      "indexed": true,
+      "indexedAsKeyword": false
+    },
+    {
+      "externalReferenceCode": "SR_FIELD_DUE_DATE",
+      "name": "dueDate",
+      "label": { "en_US": "Due Date" },
+      "businessType": "Date",
+      "DBType": "Date",
+      "required": false,
+      "indexed": true,
+      "indexedAsKeyword": false
+    }
+  ]
+}

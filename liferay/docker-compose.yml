@@ -1,0 +1,23 @@
+# Local Liferay DXP 2026.Q1 for the iOS tutorial.
+#
+#   cd liferay && docker compose up -d && docker compose logs -f liferay
+#
+# Not for production: uses the embedded Hypersonic database and dev-only settings.
+
+services:
+  liferay:
+    image: liferay/dxp:${LIFERAY_DXP_TAG:-2026.q1.14-lts}
+    container_name: lfr-ios-tutorial-dxp
+    ports:
+      - "8080:8080"
+    environment:
+      LIFERAY_JVM_OPTS: "-Xms2g -Xmx4g"
+    volumes:
+      # Files in /mnt/liferay/files are copied into LIFERAY_HOME at startup.
+      - ./configs/portal-ext.properties:/mnt/liferay/files/portal-ext.properties:ro
+      # Drop your DXP activation key (.xml) in ./deploy; it is git-ignored.
+      - ./deploy:/mnt/liferay/deploy
+      - liferay-data:/opt/liferay/data
+
+volumes:
+  liferay-data:

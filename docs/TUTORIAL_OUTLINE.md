@@ -1,8 +1,7 @@
 # Tutorial Outline — Native iOS Self-Service App on Liferay 2026.Q1
 
-> Status: **DRAFT outline** — structure and scope for review before any code is written.
-> Items marked **⚠ verify** must be checked against a running 2026.Q1 instance (`/o/api`)
-> before the chapter is written, so the tutorial never documents an endpoint from memory.
+> Status: chapters 01–02 drafted (`docs/tutorial/`). API details are checked against the 2026.Q1
+> source and a running instance (see section 6), so the tutorial never documents an endpoint from memory.
 
 ## 1. Goal
 
@@ -79,7 +78,8 @@ start from a known state, and diff consecutive tags to see exactly what a chapte
 - Why Liferay recommends Headless APIs over the retired Mobile SDK and Screens on 7.4+.
 
 ### 01 — Run Liferay 2026.Q1 locally
-- `liferay/docker-compose.yml`: DXP 2026.Q1 image (**⚠ verify** exact tag, e.g. `2026.q1.N-lts`) with a volume for `deploy/`.
+- `liferay/docker-compose.yml`: image `liferay/dxp:2026.q1.14-lts` (latest 2026.Q1 LTS patch, overridable), with a volume for `deploy/`.
+- The image ships a pre-built database, so first-start properties are ignored; `portal-ext.properties` points Liferay at a fresh Hypersonic file.
 - DXP activation key: how to request a trial key and where to drop the `.xml` file (`liferay/deploy/`, git-ignored).
 - `portal-ext.properties` for local dev (virtual host, disabling the setup wizard).
 - Exploring `/o/api` (API Explorer) as the reader's "source of truth".
@@ -90,17 +90,18 @@ start from a known state, and diff consecutive tags to see exactly what a chapte
 - **OAuth 2 application** (Control Panel → Security → OAuth 2 Administration):
   - Client profile **Native Application** (PKCE, no client secret).
   - Redirect URI `com.liferay.sample.selfservice://oauth2redirect`.
-  - Scopes: minimum needed for the user's own account, addresses, and the custom object (**⚠ verify** scope names).
+  - Scopes: `Liferay.Headless.Admin.User`, `Liferay.Headless.Admin.Address` (read), and `c_servicerequest` (the object's REST app name is its lower-cased internal name).
   - Explain *Trusted Application* (skips the consent screen) versus showing consent.
-  - Alternative: `oAuthApplicationUserAgent` client extension (**⚠ verify** whether it supports custom-scheme redirect URIs).
-- **Custom object `Service Request`** (company scope), provisioned by a **batch client extension**:
+  - Grant the *User* role **View + Create Token** on the application (otherwise regular users cannot authorize it).
+  - Created in the UI: only the *Native Application* profile offers Authorization Code (PKCE) **and** Refresh Token. Custom, non-IANA URL schemes are accepted as callback URIs.
+- **Custom object `Service Request`** (company scope), provisioned by `scripts/setup.sh` (idempotent `PUT …/by-external-reference-code/…` calls, so readers need only `curl` and `jq`):
   - Fields: `title` (text, required), `description` (long text), `category` (picklist),
     `requestStatus` (picklist: open / in-progress / closed), `priority` (integer 1–3), `dueDate` (date).
   - Relationship: none in v1. A relationship to *User* or *Account* is an optional advanced section.
-  - Permissions: grant the *User* role **Add Object Entry**. Entry-level VIEW/UPDATE/DELETE come from
-    the **Owner** role, so users see only their own requests without any client-side filtering.
-- Verify everything with `curl` before touching Xcode. Chapter checkpoint: the reader gets a token in
-  the browser and lists `/o/c/servicerequests`.
+  - Permissions: the script grants the *User* role `ADD_OBJECT_ENTRY` on resource `com.liferay.object#<id>` (additive `PATCH /roles/{id}`).
+    Entry-level VIEW/UPDATE/DELETE come from ownership, so users see only their own requests without any client-side filtering.
+- Verify everything with `curl` before touching Xcode: `scripts/smoke-test.sh` (CRUD + isolation, as Jane and John) and
+  `scripts/oauth-pkce-test.sh` (PKCE, token exchange, refresh, revoke).
 
 ### 03 — Create the iOS project
 - Xcode project plus a local Swift package `LiferayKit`. Explain why the split helps (testability, reuse).
@@ -113,7 +114,8 @@ start from a known state, and diff consecutive tags to see exactly what a chapte
 - Exchange the code at `/o/oauth2/token` and decode `access_token`, `refresh_token`, and `expires_in`.
 - Persist tokens in a Keychain-backed `TokenStore`.
 - App states: `signedOut → signingIn → signedIn(UserAccount)`; restore the session on launch.
-- **Sign out**: revoke at `/o/oauth2/revoke`, clear the Keychain, and reset state.
+- **Sign out**: Liferay 2026.Q1 has no revocation endpoint, so delete the tokens from the Keychain, reset state, and use
+  `prefersEphemeralWebBrowserSession` so the next sign-in doesn't silently reuse the web session.
 
 ### 05 — A small, correct API client
 - An `APIClient` with a generic `send<T: Decodable>(_ endpoint:)`.
@@ -127,13 +129,14 @@ start from a known state, and diff consecutive tags to see exactly what a chapte
 
 ### 06 — System object: My Profile (Read / Update)
 - `GET /o/headless-admin-user/v1.0/my-user-account`
-- Edit given name, family name, job title, and (optionally) the avatar, via **⚠ verify** `PATCH /user-accounts/{id}`.
+- Edit given name, family name, and job title via `PATCH /user-accounts/{id}` (the avatar is optional).
 - Explain why a self-service user can update their own account but cannot create or delete users. This is the
   permission model, and why the app must handle `403` gracefully.
 
 ### 07 — System object: My Addresses (full CRUD)
-- List, create, update, and delete the user's postal addresses (**⚠ verify** the exact 2026.Q1 paths under
-  `headless-admin-user`; fall back to *Account* addresses if user-level create is not exposed).
+- List: `GET /user-accounts/{id}/postal-addresses`. Read, update, delete: `/postal-addresses/{id}`.
+- **Create:** 2026.Q1 has no POST for user addresses. PATCH the user account with the full
+  `userAccountContactInformation.postalAddresses` list (existing ids plus the new one); omitted addresses are deleted.
 - Country and region pickers from `headless-admin-address` (`/countries`, `/countries/{id}/regions`).
 - Pattern: a form view model with validation, optimistic UI, and rollback on error.
 
@@ -185,13 +188,15 @@ start from a known state, and diff consecutive tags to see exactly what a chapte
 │   └── images/
 ├── liferay/
 │   ├── docker-compose.yml
-│   ├── configs/local/portal-ext.properties
-│   ├── client-extensions/
-│   │   ├── service-request-object/      # batch CX: picklists + object definition
-│   │   └── ios-oauth-app/               # OAuth2 app as CX (if supported for native redirect)
+│   ├── configs/portal-ext.properties    # local-dev settings (fresh DB, no first-login screens)
+│   ├── deploy/                          # DXP activation key goes here (git-ignored)
+│   ├── setup/
+│   │   ├── picklists.json               # Service Request Category / Status
+│   │   └── service-request-object.json  # object definition
 │   └── scripts/
-│       ├── seed-users.sh                # creates jane.doe + john.roe via headless-admin-user
-│       └── smoke-test.sh                # curl checks used in chapter 02 and CI
+│       ├── setup.sh                     # idempotent: picklists, object, permission, users
+│       ├── smoke-test.sh                # CRUD + isolation checks as Jane and John
+│       └── oauth-pkce-test.sh           # manual PKCE flow: token, refresh, revoke
 ├── ios/
 │   ├── LiferaySelfService.xcodeproj
 │   ├── LiferaySelfService/
@@ -224,18 +229,27 @@ start from a known state, and diff consecutive tags to see exactly what a chapte
 |---|---|---|
 | 1 | Liferay edition | **Liferay DXP 2026.Q1** only. Chapter 01 explains how to get a trial activation key. |
 | 2 | Licence | **Apache License 2.0** (`LICENSE`) |
-| 3 | Public name | **`liferay-ios-native-bootstrap`** (drops the internal `lfrgs-` prefix) |
+| 3 | Repository name & visibility | Keep **`lfrgs-iOS-mobile-native-bootstrap`**; stays **private** until the owner decides it is ready |
 | 4 | System object | **User profile** (read/update own account) + **Postal Addresses** (CRUD) |
 | 5 | Custom object | **`Service Request`** |
 | 6 | Minimum iOS / Xcode | iOS 17 with the current Xcode |
 
-## 6. Verification checklist (before writing chapters 02, 06, 07, 08)
+## 6. Verification checklist
 
-- [ ] Exact Docker image tag for 2026.Q1, and the licence/activation steps.
-- [ ] OAuth2 *Native Application* profile: PKCE enforcement, refresh-token behaviour, revoke endpoint.
-- [ ] Scope names for `headless-admin-user`, `headless-admin-address`, and the custom object's REST app.
-- [ ] Whether `oAuthApplicationUserAgent` client extensions accept custom-scheme redirect URIs.
-- [ ] Batch client extension format for object definitions and picklists in 2026.Q1.
-- [ ] User postal address CRUD paths, and what a default *User* role may do on them.
-- [ ] `PATCH` on own `user-accounts/{id}` with only the default *User* role.
-- [ ] Default object entry permissions (Owner) giving per-user isolation, tested with two users.
+Checked against the `2026.q1.0` source tag of `liferay/liferay-portal` and a running `liferay/dxp:2026.q1.14-lts`.
+
+- [x] Docker image tag: `2026.q1.14-lts` (latest 2026.Q1 LTS patch on 2026-10-30). The image registers a development licence on start.
+- [x] OAuth2 *Native Application* profile = Authorization Code PKCE + Refresh Token (+ JWT bearer, ROPC); custom URL schemes allowed.
+- [x] Scope names: `Liferay.Headless.Admin.User`, `Liferay.Headless.Admin.Address`, `c_servicerequest`.
+- [x] Object provisioning via `object-admin` and `headless-admin-list-type` upsert-by-ERC endpoints; object permission resource `com.liferay.object#<id>`.
+- [x] User postal address endpoints (no POST, so create goes through PATCH user account).
+- [x] Live run: `setup.sh` (twice, so it is safe to re-run) and `smoke-test.sh`: all 19 checks pass as Jane and John.
+- [x] Live run: `oauth-pkce-test.sh` driven by a headless browser as Jane: PKCE, consent, token, API calls, refresh.
+
+Findings from the live run, now reflected in chapters 01–02:
+
+- The image's pre-built database forces an admin password change (API calls return 403), so the tutorial uses a fresh Hypersonic file.
+- Users created by API must verify their email address unless `company.security.strangers.verify=false`.
+- Regular users need **View + Create Token** on the OAuth 2 application, or they get "You do not have the required permissions".
+- The consent button is **Authorize**. Access tokens last 600 s. Refresh tokens are not rotated by default.
+- **There is no token revocation endpoint** (only `authorize`, `token`, `introspect`).
