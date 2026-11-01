@@ -44,7 +44,7 @@ Edit `ios/Config/Local.xcconfig` and paste your Client ID:
 
 ```
 LIFERAY_BASE_URL = http:/$()/localhost:8080
-OAUTH_CLIENT_ID = id-5ed879da-…
+OAUTH_CLIENT_ID = id-xxxxxxxx-…
 OAUTH_REDIRECT_URI = com.liferay.sample.selfservice:/$()/oauth2redirect
 ```
 

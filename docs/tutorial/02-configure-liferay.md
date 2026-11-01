@@ -76,6 +76,10 @@ REST API at **`/o/c/servicerequests`**, plus an OAuth 2 scope named after the ob
 > picklists in **Control Panel → Picklists**. Use the field names above exactly, because the app
 > depends on them.
 
+After the script runs, **Control Panel → Objects** lists the published object:
+
+![The Service Request object in Control Panel → Objects](images/02-service-request-object.png)
+
 **Permission** via `PATCH /o/headless-admin-user/v1.0/roles/{id}`: the built-in **User** role (every
 signed-in user has it) gets `ADD_OBJECT_ENTRY` on the Service Request object. This PATCH only *adds*
 permissions; it never removes existing ones.
@@ -203,8 +207,12 @@ Sign in at <http://localhost:8080> as the admin. On the first admin sign-in, DXP
    **Trusted Application** skips the *Authorize* consent screen. That suits a first-party company app;
    leave it off to show users what they are granting.
 
-3. Click **Save**, then copy the generated **Client ID** (it looks like `id-5ed879da-…`). The
+3. Click **Save**, then copy the generated **Client ID** (it looks like `id-xxxxxxxx-xxxx-…`). The
    *Client Secret* stays empty.
+
+The saved application (Client ID masked):
+
+![The OAuth 2 application: Native Application, client authentication None, PKCE and Refresh Token](images/02-oauth-application.png)
 
 ### 3b. Scopes
 
@@ -215,6 +223,8 @@ Open the **Scopes** tab, expand these three applications, tick one checkbox in e
 | `LIFERAY.HEADLESS.ADMIN.USER` | create/update/delete data on your behalf + read data on your behalf | `Liferay.Headless.Admin.User.everything` |
 | `LIFERAY.HEADLESS.ADMIN.ADDRESS` | read data on your behalf | `Liferay.Headless.Admin.Address.everything.read` |
 | `C_SERVICEREQUEST` | create/update/delete data on your behalf + read data on your behalf | `c_servicerequest.everything` |
+
+![The Scopes tab with the three scopes ticked](images/02-oauth-scopes.png)
 
 Scopes cap what the **app** may call. They never grant the **user** extra rights: a call still
 needs the signed-in user's own permissions. For example, Jane holding the
@@ -232,6 +242,8 @@ To authorize an app, a user needs **View** *and* **Create Token** on that applic
 3. In the **User** row (every signed-in user has this role), tick **View** and **Create Token**, then
    click **Save**.
 
+![Permissions: the User role with Create Token and View ticked](images/02-oauth-permissions.png)
+
 These permissions apply to this one application only.
 
 ## 4. Test the OAuth 2 flow with curl
@@ -246,6 +258,8 @@ OAUTH_CLIENT_ID=id-xxxxxxxx ./scripts/oauth-pkce-test.sh
 1. It generates a PKCE `code_verifier` and `code_challenge`, plus a random `state`.
 2. It prints an authorize URL. Open it, sign in as **jane.doe@example.com**, and click **Authorize**
    on the consent screen (unless the app is Trusted).
+   ![Liferay's consent screen for Jane](images/02-consent-screen.png)
+
 3. The browser is redirected to `http://localhost:9999/callback?code=…&state=…` and shows
    "can't connect". That is expected: copy the URL from the address bar and paste it into the script.
 4. The script exchanges the code for tokens, calls `my-user-account` and `/o/c/servicerequests` with

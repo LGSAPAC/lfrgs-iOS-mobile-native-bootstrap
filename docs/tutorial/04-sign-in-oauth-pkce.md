@@ -59,7 +59,7 @@ returns the URL plus the PKCE values and a random **`state`**:
 ```
 http://localhost:8080/o/oauth2/authorize
   ?response_type=code
-  &client_id=id-5ed879da-…
+  &client_id=id-xxxxxxxx-…
   &redirect_uri=com.liferay.sample.selfservice://oauth2redirect
   &code_challenge=E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM
   &code_challenge_method=S256
