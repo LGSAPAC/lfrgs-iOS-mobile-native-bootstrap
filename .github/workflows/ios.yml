@@ -73,6 +73,17 @@ jobs:
             -derivedDataPath "$RUNNER_TEMP/derived" \
             CODE_SIGNING_ALLOWED=NO | tee "$RUNNER_TEMP/xcodebuild.log" | grep -E "error:|warning:|BUILD (SUCCEEDED|FAILED)"
 
+      - name: App tests (screen models against the demo backend)
+        run: |
+          set -o pipefail
+          xcodebuild test \
+            -project LiferaySelfService.xcodeproj \
+            -scheme LiferaySelfService \
+            -destination "platform=iOS Simulator,id=${{ steps.sim.outputs.udid }}" \
+            -derivedDataPath "$RUNNER_TEMP/derived" \
+            CODE_SIGNING_ALLOWED=NO 2>&1 | tee "$RUNNER_TEMP/xcodebuild-test.log" |
+            grep -E "error:|✔ Test|✘ Test|Test run with|TEST (SUCCEEDED|FAILED)|Testing failed"
+
       - name: Launch in the simulator and take screenshots
         run: |
           udid=${{ steps.sim.outputs.udid }}
@@ -121,7 +132,7 @@ jobs:
           if [ -d LiferaySelfService.xcodeproj ]; then
             zip -qr "$RUNNER_TEMP/artifacts/LiferaySelfService.xcodeproj.zip" LiferaySelfService.xcodeproj
           fi
-          cp "$RUNNER_TEMP/xcodebuild.log" "$RUNNER_TEMP/artifacts/" 2>/dev/null || true
+          cp "$RUNNER_TEMP"/xcodebuild*.log "$RUNNER_TEMP/artifacts/" 2>/dev/null || true
 
       - name: Upload artifacts
         if: always()

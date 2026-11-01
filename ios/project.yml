@@ -44,10 +44,28 @@ targets:
         # Set your team in Xcode (Signing & Capabilities) to run on a device.
         CODE_SIGN_STYLE: Automatic
 
+  LiferaySelfServiceTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: LiferaySelfServiceTests
+    # Hosted in the app: LiferayKit comes from the app, so it isn't linked a second time here.
+    dependencies:
+      - target: LiferaySelfService
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.liferay.sample.selfservice.tests
+        GENERATE_INFOPLIST_FILE: YES
+
 schemes:
   LiferaySelfService:
     build:
       targets:
         LiferaySelfService: all
+        LiferaySelfServiceTests: [test]
     run:
       config: Debug
+    test:
+      config: Debug
+      targets:
+        - LiferaySelfServiceTests
