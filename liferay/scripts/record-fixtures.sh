@@ -11,6 +11,8 @@
 # Requires: bash, curl, jq
 
 set -euo pipefail
+# Make "set -e" apply inside $(...) too, so a failed request stops the script.
+shopt -s inherit_errexit 2>/dev/null || true  # Bash 4.4+; macOS ships Bash 3.2
 
 # Never wait forever on a request: a Liferay that accepts connections but doesn't answer yet would
 # otherwise hang the script (and CI) indefinitely. CURL_MAX_TIME overrides the per-request limit.
@@ -67,8 +69,9 @@ as_jane() { curl -sS -u "$JANE:$TUTORIAL_USER_PASSWORD" -H 'Accept: application/
 cleanup() {
 	local id
 	as_jane -o /dev/null -X DELETE "$LIFERAY_URL$SR_API/by-external-reference-code/fixture-sr-0001" || true
-	for id in $(as_jane "$LIFERAY_URL$USER_API/my-user-account" | jq -r '.id' | xargs -I{} \
-		curl -sS -u "$JANE:$TUTORIAL_USER_PASSWORD" "$LIFERAY_URL$USER_API/user-accounts/{}/postal-addresses" |
+	local jane_id
+	jane_id=$(as_jane "$LIFERAY_URL$USER_API/my-user-account" | jq -r '.id') || return 0
+	for id in $(as_jane "$LIFERAY_URL$USER_API/user-accounts/$jane_id/postal-addresses" |
 		jq -r '.items[] | select(.postalCode == "91765") | .id'); do
 		as_jane -o /dev/null -X DELETE "$LIFERAY_URL$USER_API/postal-addresses/$id" || true
 	done

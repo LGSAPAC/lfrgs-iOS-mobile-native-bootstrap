@@ -11,6 +11,8 @@
 # Requires: bash, curl, jq, openssl
 
 set -euo pipefail
+# Make "set -e" apply inside $(...) too, so a failed request stops the script.
+shopt -s inherit_errexit 2>/dev/null || true  # Bash 4.4+; macOS ships Bash 3.2
 
 # Never wait forever on a request: a Liferay that accepts connections but doesn't answer yet would
 # otherwise hang the script (and CI) indefinitely. CURL_MAX_TIME overrides the per-request limit.

@@ -14,10 +14,14 @@
 # Requires: bash, curl, jq
 
 set -euo pipefail
+# Make "set -e" apply inside $(...) too, so a failed request stops the script.
+shopt -s inherit_errexit 2>/dev/null || true  # Bash 4.4+; macOS ships Bash 3.2
 
 # Never wait forever on a request: a Liferay that accepts connections but doesn't answer yet would
 # otherwise hang the script (and CI) indefinitely. CURL_MAX_TIME overrides the per-request limit.
-curl() { command curl --connect-timeout 10 --max-time "${CURL_MAX_TIME:-120}" "$@"; }
+# Setup writes (creating and publishing the object) can take minutes on a freshly started Liferay.
+CURL_MAX_TIME="${CURL_MAX_TIME:-600}"
+curl() { command curl --connect-timeout 10 --max-time "$CURL_MAX_TIME" "$@"; }
 
 LIFERAY_URL="${LIFERAY_URL:-http://localhost:8080}"
 ADMIN_USER="${ADMIN_USER:-test@liferay.com}"
@@ -37,13 +41,12 @@ log() { printf '\n==> %s\n' "$*"; }
 api() {
 	local method="$1" path="$2" body="${3:-}" response status
 
-	if [[ -n "$body" ]]; then
-		response=$(curl -sS -w '\n%{http_code}' -u "$ADMIN_USER:$ADMIN_PASSWORD" \
-			-X "$method" -H 'Content-Type: application/json' -H 'Accept: application/json' \
-			--data-binary "$body" "$LIFERAY_URL$path")
-	else
-		response=$(curl -sS -w '\n%{http_code}' -u "$ADMIN_USER:$ADMIN_PASSWORD" \
-			-X "$method" -H 'Accept: application/json' "$LIFERAY_URL$path")
+	local args=(-sS -w '\n%{http_code}' -u "$ADMIN_USER:$ADMIN_PASSWORD" -X "$method" -H 'Accept: application/json')
+	[[ -n "$body" ]] && args+=(-H 'Content-Type: application/json' --data-binary "$body")
+
+	if ! response=$(curl "${args[@]}" "$LIFERAY_URL$path"); then
+		echo "error: $method $path: no response within ${CURL_MAX_TIME}s (is Liferay overloaded or still starting?)" >&2
+		exit 1
 	fi
 
 	status="${response##*$'\n'}"
