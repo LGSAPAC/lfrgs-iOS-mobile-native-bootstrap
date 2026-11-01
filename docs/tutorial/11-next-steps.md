@@ -31,8 +31,8 @@ for taking it further, roughly from easiest to most involved.
 
 - **Offline support.** Cache lists with SwiftData; queue creates by external reference code (already
   idempotent) and send them when the network returns.
-- **Generated models.** Every Liferay API publishes OpenAPI at `/o/{api}/openapi.yaml`. Apple's
-  `swift-openapi-generator` can generate clients from it. This tutorial writes models by hand to keep it
+- **Generated models.** Every Liferay headless API publishes an OpenAPI description (browse them in the
+  API Explorer at `/o/api`). Apple's `swift-openapi-generator` can generate clients from it. This tutorial writes models by hand to keep it
   readable and dependency-free.
 - **Android.** `LiferayKit`'s design (transport abstraction, single-flight refresh, drafts that encode
   only what Liferay accepts) maps directly to Kotlin with Ktor or OkHttp.

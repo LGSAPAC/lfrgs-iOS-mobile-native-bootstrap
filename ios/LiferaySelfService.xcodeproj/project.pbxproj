@@ -10,12 +10,14 @@
 		1E7CE4AB524348AA14AF71A5 /* AddressFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799B2F25D40B8A9DA3063515 /* AddressFormView.swift */; };
 		345C8CAA876544AC3B02018E /* ServiceRequestListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8012877B636989D7EA8DBB3 /* ServiceRequestListView.swift */; };
 		35450F6D1401BA7EEF239D9D /* DemoBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB2C7432DA32669C7B3AC86 /* DemoBackend.swift */; };
+		3852819DADF88C617FA27F2D /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = C79A662C26616CE147037172 /* PrivacyInfo.xcprivacy */; };
 		5494CB47FE598481C597ED22 /* AddressListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020A6AFD6D42D949AB8B4EA0 /* AddressListModel.swift */; };
 		55DC1D9D9FB1D2948CBEA451 /* LiferaySelfServiceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8510DC3414C458BA269776CF /* LiferaySelfServiceApp.swift */; };
 		5950C80783720F8A86CB78BE /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EE11375A0EEFB435666B24 /* ProfileView.swift */; };
 		6BCDC8E0397CB449725F1F3C /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0C4E81470F0C7423919A38 /* ErrorMessage.swift */; };
 		895F6E8D56376A5941A9B704 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA013239C26001CC284C5EAE /* AppModel.swift */; };
 		8C4D20DA15869BC0B3632C8B /* ServiceRequestDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B567CF2F86A34E79C82CAE /* ServiceRequestDetailView.swift */; };
+		AA7FD77155CE23755F70D240 /* ScreenModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597111E5C8497742791031CB /* ScreenModelTests.swift */; };
 		ACF4E6C9FB81A68DB7A4C1A5 /* LiferayKit in Frameworks */ = {isa = PBXBuildFile; productRef = 15DEC2E5405E598DC0B509C4 /* LiferayKit */; };
 		BB01828A4C00C38F11D184E5 /* AddressListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E63D94FAA3F3514ABCF6479 /* AddressListView.swift */; };
 		C9787E39A57652124716DF3C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32474AAA40F0E84B133BE12E /* HomeView.swift */; };
@@ -23,6 +25,16 @@
 		ED35720A76C2C255A223F7C7 /* ServiceRequestListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9E7465D7A478A7B6F8593E /* ServiceRequestListModel.swift */; };
 		FC61987294B35F681BD9123B /* ServiceRequestFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73529B4AA5B7698E40DD4522 /* ServiceRequestFormView.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FE52B9D9999C4FFD747E81D9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC454BE114DACBE07D4B8E13 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3206C4B17E28695BE23442B8;
+			remoteInfo = LiferaySelfService;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		020A6AFD6D42D949AB8B4EA0 /* AddressListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressListModel.swift; sourceTree = "<group>"; };
@@ -32,7 +44,9 @@
 		2A0C4E81470F0C7423919A38 /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		32474AAA40F0E84B133BE12E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		401C41BB4F67145F0DA8C27F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		433FB6B0AA343B5915B0C978 /* LiferaySelfServiceTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = LiferaySelfServiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CB2C7432DA32669C7B3AC86 /* DemoBackend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoBackend.swift; sourceTree = "<group>"; };
+		597111E5C8497742791031CB /* ScreenModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenModelTests.swift; sourceTree = "<group>"; };
 		70802C27006068FD73E58344 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		73529B4AA5B7698E40DD4522 /* ServiceRequestFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceRequestFormView.swift; sourceTree = "<group>"; };
 		76D65DD19088EA3C7638AA09 /* Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Shared.xcconfig; sourceTree = "<group>"; };
@@ -41,6 +55,7 @@
 		834A96387615404592E4E636 /* LiferayKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = LiferayKit; path = LiferayKit; sourceTree = SOURCE_ROOT; };
 		8510DC3414C458BA269776CF /* LiferaySelfServiceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiferaySelfServiceApp.swift; sourceTree = "<group>"; };
 		8B9E7465D7A478A7B6F8593E /* ServiceRequestListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceRequestListModel.swift; sourceTree = "<group>"; };
+		C79A662C26616CE147037172 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		D8012877B636989D7EA8DBB3 /* ServiceRequestListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceRequestListView.swift; sourceTree = "<group>"; };
 		DA013239C26001CC284C5EAE /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -61,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				0BBE229E14FC616D9F0B3C1A /* LiferaySelfService.app */,
+				433FB6B0AA343B5915B0C978 /* LiferaySelfServiceTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -80,9 +96,18 @@
 			children = (
 				BA7E7455353B94E3270B845B /* Config */,
 				DC32AF8879999D1B66A74326 /* LiferaySelfService */,
+				922AADA9FC1F013F35F01D81 /* LiferaySelfServiceTests */,
 				A507AE2A941B98D68280D171 /* Packages */,
 				029E4CFA6538EE79F39641AB /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		922AADA9FC1F013F35F01D81 /* LiferaySelfServiceTests */ = {
+			isa = PBXGroup;
+			children = (
+				597111E5C8497742791031CB /* ScreenModelTests.swift */,
+			);
+			path = LiferaySelfServiceTests;
 			sourceTree = "<group>";
 		};
 		A507AE2A941B98D68280D171 /* Packages */ = {
@@ -155,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				401C41BB4F67145F0DA8C27F /* Info.plist */,
+				C79A662C26616CE147037172 /* PrivacyInfo.xcprivacy */,
 				BD0AE332AF630579A5249B11 /* App */,
 				C2D6B78BA75E43616551629E /* Features */,
 			);
@@ -177,6 +203,7 @@
 			buildConfigurationList = 153E932CD399F96954D456BF /* Build configuration list for PBXNativeTarget "LiferaySelfService" */;
 			buildPhases = (
 				A3B69BAF92751E61DC83B5FB /* Sources */,
+				986BC06B93C2394DE5B672D4 /* Resources */,
 				E4E9A338D2CE951C52F15066 /* Frameworks */,
 			);
 			buildRules = (
@@ -190,6 +217,24 @@
 			productName = LiferaySelfService;
 			productReference = 0BBE229E14FC616D9F0B3C1A /* LiferaySelfService.app */;
 			productType = "com.apple.product-type.application";
+		};
+		AAE928728A046A284C53BD96 /* LiferaySelfServiceTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04BAF0FA99B046BFE8BF60C7 /* Build configuration list for PBXNativeTarget "LiferaySelfServiceTests" */;
+			buildPhases = (
+				7C37C447EC2B97103D6DD5C7 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EB8C08990944E198F2D33DA4 /* PBXTargetDependency */,
+			);
+			name = LiferaySelfServiceTests;
+			packageProductDependencies = (
+			);
+			productName = LiferaySelfServiceTests;
+			productReference = 433FB6B0AA343B5915B0C978 /* LiferaySelfServiceTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -223,11 +268,31 @@
 			projectRoot = "";
 			targets = (
 				3206C4B17E28695BE23442B8 /* LiferaySelfService */,
+				AAE928728A046A284C53BD96 /* LiferaySelfServiceTests */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		986BC06B93C2394DE5B672D4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3852819DADF88C617FA27F2D /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		7C37C447EC2B97103D6DD5C7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA7FD77155CE23755F70D240 /* ScreenModelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A3B69BAF92751E61DC83B5FB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -251,7 +316,32 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		EB8C08990944E198F2D33DA4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3206C4B17E28695BE23442B8 /* LiferaySelfService */;
+			targetProxy = FE52B9D9999C4FFD747E81D9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		27653D726B40C4AD31D369F9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.liferay.sample.selfservice.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LiferaySelfService.app/LiferaySelfService";
+			};
+			name = Release;
+		};
 		6AA11B609C1B7D137715DA70 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -330,6 +420,23 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.liferay.sample.selfservice;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		B2E6EE22570E7AC2479D7160 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.liferay.sample.selfservice.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LiferaySelfService.app/LiferaySelfService";
 			};
 			name = Debug;
 		};
@@ -424,6 +531,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		04BAF0FA99B046BFE8BF60C7 /* Build configuration list for PBXNativeTarget "LiferaySelfServiceTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B2E6EE22570E7AC2479D7160 /* Debug */,
+				27653D726B40C4AD31D369F9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		153E932CD399F96954D456BF /* Build configuration list for PBXNativeTarget "LiferaySelfService" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
