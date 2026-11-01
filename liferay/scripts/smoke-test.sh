@@ -71,6 +71,20 @@ if [[ -n "$address_id" ]]; then
 	call "$JANE" GET "$USER_API/postal-addresses/$address_id"
 	expect 200 "GET postal address"
 
+	# The app sends the English country name and the region code (chapter 07). Guard both rules.
+	call "$JANE" PUT "$USER_API/postal-addresses/$address_id" '{"addressCountry": "Germany", "addressRegion": "BE",
+	  "addressLocality": "Berlin", "postalCode": "10115", "streetAddressLine1": "Unter den Linden 1",
+	  "addressType": "personal", "primary": true}'
+	expect 200 "PUT postal address with English country name + region code"
+	call "$JANE" PUT "$USER_API/postal-addresses/$address_id" '{"addressCountry": "DE", "addressRegion": "BE",
+	  "addressLocality": "Berlin", "postalCode": "10115", "streetAddressLine1": "Unter den Linden 1",
+	  "addressType": "personal", "primary": true}'
+	expect 400 "PUT postal address with a country code is rejected (known quirk)"
+	call "$JANE" PUT "$USER_API/postal-addresses/$address_id" '{"addressCountry": "Germany",
+	  "addressLocality": "Berlin", "postalCode": "10115", "streetAddressLine1": "Unter den Linden 1",
+	  "addressType": "personal", "primary": true}'
+	expect 400 "PUT postal address without a region is rejected when the country has regions"
+
 	call "$JANE" DELETE "$USER_API/postal-addresses/$address_id"
 	expect 204 "DELETE postal address"
 fi
@@ -91,6 +105,16 @@ if jq -e --argjson id "${sr_id:-0}" '[.items[].id] | index($id) != null' <<<"$BO
 
 call "$JANE" PATCH "$SR_API/$sr_id" '{"requestStatus": {"key": "inProgress"}}'
 expect 200 "PATCH service request status"
+
+# The app edits with PUT, because PATCH ignores null; an empty Integer comes back as 0.
+call "$JANE" PUT "$SR_API/$sr_id" '{"title": "Smoke test request", "description": "",
+  "category": {"key": "billing"}, "requestStatus": {"key": "inProgress"}, "priority": null, "dueDate": null}'
+expect 200 "PUT service request (clear priority and due date)"
+if jq -e '.priority == 0 and (has("dueDate") | not)' <<<"$BODY" >/dev/null; then
+	pass "PUT cleared priority (returned as 0) and due date"
+else
+	fail "PUT did not clear the fields: $(jq -c '{priority, dueDate}' <<<"$BODY")"
+fi
 
 echo "Isolation (as John)"
 call "$JOHN" GET "$SR_API?pageSize=50"
