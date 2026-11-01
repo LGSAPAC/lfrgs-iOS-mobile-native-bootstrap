@@ -66,16 +66,27 @@ jobs:
         run: |
           ./scripts/record-fixtures.sh "$RUNNER_TEMP/fixtures"
           # Ids and dates differ between runs; compare only the JSON structure (sorted key paths).
-          shape() { jq -c '[paths | map(if type == "number" then 0 else . end)] | unique' "$1"; }
+          shape() { jq -c '[paths | map(if type == "number" then 0 else . end)] | unique | .[]' "$1"; }
           status=0
           for recorded in "$RUNNER_TEMP"/fixtures/*.json; do
-            committed="../ios/LiferayKit/Tests/LiferayKitTests/Fixtures/$(basename "$recorded")"
-            if ! diff <(shape "$committed") <(shape "$recorded") >/dev/null; then
-              echo "::error file=$committed::Response shape changed; re-run liferay/scripts/record-fixtures.sh"
+            name="$(basename "$recorded")"
+            committed="../ios/LiferayKit/Tests/LiferayKitTests/Fixtures/$name"
+            if ! changes=$(diff <(shape "$committed") <(shape "$recorded")); then
+              echo "::error file=ios/LiferayKit/Tests/LiferayKitTests/Fixtures/$name::$name: response shape changed"
+              echo "--- $name ('<' committed only, '>' new response only)"
+              echo "$changes" | grep '^[<>]' | head -40
               status=1
             fi
           done
           exit $status
+
+      - name: Upload recorded fixtures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: recorded-fixtures
+          path: ${{ runner.temp }}/fixtures
+          if-no-files-found: ignore
 
       - name: Liferay logs
         if: failure()
