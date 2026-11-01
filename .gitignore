@@ -1,0 +1,14 @@
+# macOS / Xcode
+.DS_Store
+xcuserdata/
+DerivedData/
+*.xcuserstate
+.swiftpm/
+.build/
+
+# Local configuration (never commit secrets or environment-specific values)
+ios/Config/Local.xcconfig
+
+# Liferay DXP activation key and local runtime data
+liferay/deploy/*.xml
+liferay/data/
