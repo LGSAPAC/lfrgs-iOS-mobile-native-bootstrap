@@ -15,6 +15,10 @@
 
 set -euo pipefail
 
+# Never wait forever on a request: a Liferay that accepts connections but doesn't answer yet would
+# otherwise hang the script (and CI) indefinitely. CURL_MAX_TIME overrides the per-request limit.
+curl() { command curl --connect-timeout 10 --max-time "${CURL_MAX_TIME:-120}" "$@"; }
+
 LIFERAY_URL="${LIFERAY_URL:-http://localhost:8080}"
 ADMIN_USER="${ADMIN_USER:-test@liferay.com}"
 ADMIN_PASSWORD="${ADMIN_PASSWORD:-test}"
@@ -57,8 +61,9 @@ api() {
 wait_for_liferay() {
 	log "Waiting for Liferay at $LIFERAY_URL (first start can take several minutes)"
 
-	for _ in $(seq 1 $((WAIT_MINUTES * 12))); do
-		if curl -fsS -o /dev/null -u "$ADMIN_USER:$ADMIN_PASSWORD" \
+	for attempt in $(seq 1 $((WAIT_MINUTES * 12))); do
+		(( attempt % 12 == 0 )) && echo "  still waiting ($((attempt / 12)) min)…"
+		if curl -fsS -o /dev/null --max-time 15 -u "$ADMIN_USER:$ADMIN_PASSWORD" \
 			"$LIFERAY_URL/o/headless-admin-user/v1.0/my-user-account"; then
 			echo "Liferay is up."
 			return

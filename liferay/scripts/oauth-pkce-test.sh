@@ -12,6 +12,10 @@
 
 set -euo pipefail
 
+# Never wait forever on a request: a Liferay that accepts connections but doesn't answer yet would
+# otherwise hang the script (and CI) indefinitely. CURL_MAX_TIME overrides the per-request limit.
+curl() { command curl --connect-timeout 10 --max-time "${CURL_MAX_TIME:-120}" "$@"; }
+
 LIFERAY_URL="${LIFERAY_URL:-http://localhost:8080}"
 REDIRECT_URI="${REDIRECT_URI:-http://localhost:9999/callback}"
 : "${OAUTH_CLIENT_ID:?Set OAUTH_CLIENT_ID to the Client ID shown in OAuth 2 Administration}"
