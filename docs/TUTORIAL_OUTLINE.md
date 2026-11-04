@@ -262,7 +262,7 @@ Findings from the live run, now reflected in chapters 01–02:
 
 ## 7. Before making the repository public
 
-- [ ] Choose the Code of Conduct contact and replace the placeholder in `CODE_OF_CONDUCT.md`.
+- [x] Code of Conduct contact: private reporting through GitHub (no personal address published).
 - [ ] Turn on **private vulnerability reporting** (Settings → Code security), which `SECURITY.md` relies on.
 - [ ] Confirm the `Liferay` CI workflow is green on `main`.
 - [ ] Re-check the README status table and that every chapter's checkpoint still passes.
