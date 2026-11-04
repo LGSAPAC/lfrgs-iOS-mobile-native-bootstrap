@@ -1,5 +1,9 @@
 # 06 — My Profile (system object: User)
 
+> **Unofficial reference.** This tutorial is an unofficial reference, not official Liferay
+> documentation, and is not supported by Liferay. See [learn.liferay.com](https://learn.liferay.com)
+> for official documentation.
+
 The first screen with real data: the signed-in user reads and edits their own **User** record. User is
 one of Liferay's built-in *system objects*; the app reaches it through `headless-admin-user`.
 

@@ -1,5 +1,9 @@
 # 00 — Introduction
 
+> **Unofficial reference.** This tutorial is an unofficial reference, not official Liferay
+> documentation, and is not supported by Liferay. See [learn.liferay.com](https://learn.liferay.com)
+> for official documentation.
+
 This tutorial builds a **native iOS app on Liferay DXP 2026.Q1** from scratch: a self-service app in
 which a user signs in with their Liferay account and manages their own data.
 

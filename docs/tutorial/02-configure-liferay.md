@@ -1,5 +1,9 @@
 # 02 — Configure Liferay for a self-service user
 
+> **Unofficial reference.** This tutorial is an unofficial reference, not official Liferay
+> documentation, and is not supported by Liferay. See [learn.liferay.com](https://learn.liferay.com)
+> for official documentation.
+
 In this chapter you prepare everything the app needs on the Liferay side:
 
 1. A **Service Request** custom object, with two picklists.

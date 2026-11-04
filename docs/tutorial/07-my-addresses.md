@@ -1,5 +1,9 @@
 # 07 — My Addresses (system object: Postal Address)
 
+> **Unofficial reference.** This tutorial is an unofficial reference, not official Liferay
+> documentation, and is not supported by Liferay. See [learn.liferay.com](https://learn.liferay.com)
+> for official documentation.
+
 Full CRUD on a second system object, the user's **postal addresses**. This is the chapter with the most
 Liferay surprises; each one below was found against a running Liferay DXP 2026.Q1, and
 `smoke-test.sh` re-checks it on every CI run.

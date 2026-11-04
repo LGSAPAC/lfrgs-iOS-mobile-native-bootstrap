@@ -2,6 +2,12 @@
 
 [![Liferay](https://github.com/LGSAPAC/lfrgs-iOS-mobile-native-bootstrap/actions/workflows/liferay.yml/badge.svg)](https://github.com/LGSAPAC/lfrgs-iOS-mobile-native-bootstrap/actions/workflows/liferay.yml)
 
+> [!IMPORTANT]
+> **Unofficial reference, not official documentation.** This repository is an unofficial reference
+> for tutorials. It is **not** official Liferay documentation, and it is not reviewed, endorsed or
+> supported by Liferay (including Liferay Support). Use it as a learning aid and verify against your
+> own environment. For official documentation, see [learn.liferay.com](https://learn.liferay.com).
+
 A step-by-step tutorial and reference app for building a **native iOS (SwiftUI) app on
 Liferay DXP 2026.Q1**, using only Liferay's headless REST APIs:
 

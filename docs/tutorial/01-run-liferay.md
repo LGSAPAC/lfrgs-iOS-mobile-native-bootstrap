@@ -1,5 +1,9 @@
 # 01 — Run Liferay DXP 2026.Q1 locally
 
+> **Unofficial reference.** This tutorial is an unofficial reference, not official Liferay
+> documentation, and is not supported by Liferay. See [learn.liferay.com](https://learn.liferay.com)
+> for official documentation.
+
 In this chapter you start a local Liferay DXP 2026.Q1 instance in Docker and explore the headless
 APIs the iOS app will use.
 

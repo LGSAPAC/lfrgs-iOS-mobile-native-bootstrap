@@ -1,5 +1,9 @@
 # 05 — A small, correct API client
 
+> **Unofficial reference.** This tutorial is an unofficial reference, not official Liferay
+> documentation, and is not supported by Liferay. See [learn.liferay.com](https://learn.liferay.com)
+> for official documentation.
+
 Every screen from chapter 06 on calls Liferay. This chapter builds the one place that does it, and
 encodes Liferay's conventions once so the screens don't have to: tokens, refresh, paging, errors,
 dates and picklists.

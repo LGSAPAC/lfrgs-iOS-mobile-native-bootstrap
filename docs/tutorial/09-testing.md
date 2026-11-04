@@ -1,5 +1,9 @@
 # 09 — Testing
 
+> **Unofficial reference.** This tutorial is an unofficial reference, not official Liferay
+> documentation, and is not supported by Liferay. See [learn.liferay.com](https://learn.liferay.com)
+> for official documentation.
+
 This tutorial is tested at four levels. Each level catches a different kind of mistake, and all four
 run in CI on every push.
 

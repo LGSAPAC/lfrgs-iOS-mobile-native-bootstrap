@@ -1,5 +1,9 @@
 # 04 — Sign in with OAuth 2 + PKCE
 
+> **Unofficial reference.** This tutorial is an unofficial reference, not official Liferay
+> documentation, and is not supported by Liferay. See [learn.liferay.com](https://learn.liferay.com)
+> for official documentation.
+
 In this chapter the app signs a user in with Liferay's own sign-in page and gets tokens, without ever
 seeing the user's password. It is the same flow you ran by hand with `oauth-pkce-test.sh` in
 chapter 02, now in Swift.

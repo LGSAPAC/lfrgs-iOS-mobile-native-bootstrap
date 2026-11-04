@@ -1,5 +1,9 @@
 # 03 — Create the iOS project
 
+> **Unofficial reference.** This tutorial is an unofficial reference, not official Liferay
+> documentation, and is not supported by Liferay. See [learn.liferay.com](https://learn.liferay.com)
+> for official documentation.
+
 In this chapter you set up the Xcode project. It has two parts:
 
 - **`LiferayKit`**, a local Swift package with everything that talks to Liferay: OAuth 2, tokens,

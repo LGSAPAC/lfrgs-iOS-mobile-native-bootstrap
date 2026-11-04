@@ -1,5 +1,9 @@
 # 10 — Production hardening
 
+> **Unofficial reference.** This tutorial is an unofficial reference, not official Liferay
+> documentation, and is not supported by Liferay. See [learn.liferay.com](https://learn.liferay.com)
+> for official documentation.
+
 The tutorial setup is deliberately relaxed so it is quick to follow. This chapter is the checklist for
 moving the app and Liferay to a real environment. Items marked **(app)** change the iOS project;
 **(Liferay)** items are server configuration.

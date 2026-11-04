@@ -1,5 +1,9 @@
 # Contributing
 
+> **Unofficial reference.** This tutorial is an unofficial reference, not official Liferay
+> documentation, and is not supported by Liferay. See [learn.liferay.com](https://learn.liferay.com)
+> for official documentation.
+
 Thanks for helping improve this tutorial. Fixes to typos, broken steps, outdated screenshots and
 code are all welcome, as are new chapters.
 

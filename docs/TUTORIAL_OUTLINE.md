@@ -1,5 +1,9 @@
 # Tutorial Outline — Native iOS Self-Service App on Liferay 2026.Q1
 
+> **Unofficial reference.** This tutorial is an unofficial reference, not official Liferay
+> documentation, and is not supported by Liferay. See [learn.liferay.com](https://learn.liferay.com)
+> for official documentation.
+
 > Status: chapters 01–08 written. The Liferay side (01–02, and every API call in 06–08) is checked
 > against a running DXP 2026.Q1 in CI; LiferayKit is unit-tested on Linux and macOS; the app is built
 > on a GitHub-hosted Mac and screenshotted in the Simulator (demo mode). Not yet run: signing in

@@ -1,5 +1,9 @@
 # 11 — Next steps
 
+> **Unofficial reference.** This tutorial is an unofficial reference, not official Liferay
+> documentation, and is not supported by Liferay. See [learn.liferay.com](https://learn.liferay.com)
+> for official documentation.
+
 You now have a native iOS app that signs users in with OAuth 2 + PKCE and manages their own data in
 Liferay: a system object (User, Postal Address) and a custom object (Service Request). Here are ideas
 for taking it further, roughly from easiest to most involved.

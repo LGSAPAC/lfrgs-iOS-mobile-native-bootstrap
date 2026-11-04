@@ -1,5 +1,9 @@
 # 08 — Service Requests (custom object)
 
+> **Unofficial reference.** This tutorial is an unofficial reference, not official Liferay
+> documentation, and is not supported by Liferay. See [learn.liferay.com](https://learn.liferay.com)
+> for official documentation.
+
 Full CRUD on the custom **Service Request** object from chapter 02, with search, a status filter and
 infinite scroll. Liferay generated its REST API (`/o/c/servicerequests`) the moment the object was
 published; the app treats it like any other API.
