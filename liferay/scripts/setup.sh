@@ -70,6 +70,8 @@ wait_for_liferay() {
 		if curl -fs -o /dev/null --max-time 15 -u "$ADMIN_USER:$ADMIN_PASSWORD" \
 			"$LIFERAY_URL/o/headless-admin-user/v1.0/my-user-account"; then
 			echo "Liferay is up after $((SECONDS / 60))m $((SECONDS % 60))s."
+			# Render a page once so Liferay loads its language resources before the first write.
+			curl -fs -o /dev/null --max-time 120 "$LIFERAY_URL/web/guest" || true
 			return
 		fi
 		if (( SECONDS >= next_report )); then

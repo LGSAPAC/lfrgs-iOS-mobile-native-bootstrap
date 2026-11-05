@@ -123,7 +123,7 @@ jobs:
             'jcmd "$(pgrep -f org.apache.catalina.startup.Bootstrap | head -1)" Thread.print -l' > "$dump" || true
           docker compose logs liferay > "$RUNNER_TEMP/diagnostics/liferay.log" 2>&1 || true
 
-          # Print every thread holding a lock that another thread is waiting for (with its stack),
+          # Print every thread holding a lock that another thread is waiting for, then the waiters (with stacks),
           # plus the JVM's own deadlock report. The full dump is uploaded as an artifact.
           python3 - "$dump" <<'EOF'
           import re, sys
@@ -136,6 +136,13 @@ jobs:
               if held:
                   print(f"\n=== holds {', '.join(sorted(held))} ===")
                   print("\n".join(t.splitlines()[:80]))
+          waiters = [t for t in threads if "waiting to lock <" in t]
+          print(f"\n--- {len(waiters)} thread(s) waiting for a lock; the first 5:")
+          for t in waiters[:5]:
+              wants = set(re.findall(r"waiting to lock <(0x[0-9a-f]+)>", t))
+              if wants:
+                  print(f"\n=== waits for {', '.join(sorted(wants))} ===")
+                  print("\n".join(t.splitlines()[:60]))
           if "Found one Java-level deadlock" in text or "deadlock" in text.lower():
               print("\n--- JVM deadlock report ---")
               print(text[text.lower().find("found"):][:6000])
